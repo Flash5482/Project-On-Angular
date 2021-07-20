@@ -1,0 +1,21 @@
+<div class="wrap-header">
+  <div class="adaptive_menu" [ngClass]="{active:showMenu}"></div>
+  <div class="header_logo__title" [ngClass]="{active:showMenu}">
+    <div class="header__logo">
+      <img class="logo" src="../../assets/img/pizza.svg" alt="тщ">
+    </div>
+    <p>andy'z pizza </p>
+  </div>
+
+  <app-nav *ngFor="let iterItem of navItems" [navItem]="iterItem" [showNav]="showMenu"></app-nav>
+
+</div>
+<div (click)="moveMenu()" class="menu__burger" [ngClass]="{active:showMenu}">
+  <span></span>
+</div>
+
+
+
+
+
+
