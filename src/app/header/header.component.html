@@ -7,7 +7,7 @@
     <p>andy'z pizza </p>
   </div>
 
-  <app-nav *ngFor="let iterItem of navItems" [navItem]="iterItem" [showNav]="showMenu"></app-nav>
+  <app-nav *ngFor="let iterItem of navItems" [closeMenu]="closeMenu"  [navItem]="iterItem" [showNav]="showMenu"></app-nav>
 
 </div>
 <div (click)="moveMenu()" class="menu__burger" [ngClass]="{active:showMenu}">

@@ -10,6 +10,9 @@ export class NavComponent implements OnInit {
 
   @Input() showNav: HeaderComponent | any;
   @Input() navItem: HeaderComponent | any;
+  @Input() closeMenu: HeaderComponent | any;
+
+  deleteActiveClass: boolean = true;
 
   constructor() {
 

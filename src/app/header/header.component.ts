@@ -2,7 +2,8 @@ import {Component, OnInit} from '@angular/core';
 
 export interface navItem {
   title: string,
-  image: string
+  image: string,
+  path:string
 }
 
 @Component({
@@ -12,10 +13,13 @@ export interface navItem {
 })
 export class HeaderComponent implements OnInit {
 
+
   constructor() {
   }
   showMenu: boolean = false;
-
+   public  closeMenu = ()=>{
+    this.showMenu= false;
+  };
   ngOnInit(): void {
 
 
@@ -24,22 +28,28 @@ export class HeaderComponent implements OnInit {
   navItems: navItem[] = [
     {
       title: "Pizza",
-      image: "assets/img/nav_pizza.svg"
+      image: "assets/img/nav_pizza.svg",
+      path: "pizza"
     }, {
       title: "Salad",
-      image: "assets/img/salad.svg"
+      image: "assets/img/salad.svg",
+      path: "salad"
     }, {
       title: "Dessert",
-      image: "assets/img/cake.svg"
+      image: "assets/img/cake.svg",
+      path: "dessert"
     }, {
       title: "Drinks",
-      image: "assets/img/cocktail.svg"
+      image: "assets/img/cocktail.svg",
+      path: "drinks"
     }, {
       title: "Payment",
-      image: "assets/img/wallet.svg"
+      image: "assets/img/wallet.svg",
+      path: "payment"
     }, {
       title: "Basket",
-      image: "assets/img/shopping-cart.svg"
+      image: "assets/img/shopping-cart.svg",
+      path: "basket"
     }
   ]
 

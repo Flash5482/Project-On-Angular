@@ -1,0 +1,27 @@
+
+  <div class="card-pizza">
+    <div class="card-pizza__img">
+      <img src="{{pizzaItem.img}}" alt="">
+    </div>
+    <div class="card-pizza__title">
+      <p>{{pizzaItem.title}}</p>
+    </div>
+    <div class="card-pizza__description">
+      <p>{{pizzaItem.ingredient}}</p>
+    </div>
+    <div class="card-pizza__pay">
+      <div class="pizza__pay-price">
+        <p>{{pizzaItem.price * countOfPizza}}UAN</p>
+      </div>
+      <div class="pizza__pay-count">
+        <div (click)="changeCount('-')" class="minus"><span></span></div>
+        <input (input)="countInInput($event)" [value]="countOfPizza" name="" id="" cols="2" rows="1">
+        <div (click)="changeCount('+')"  class="plus" ><span></span>
+        </div>
+      </div>
+    </div>
+    <div class="pizza__pay-button">
+      <button (click)="setPrice(pizzaItem.price,countOfPizza)">Add to basket</button>
+    </div>
+  </div>
+

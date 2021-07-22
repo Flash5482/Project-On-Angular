@@ -1,0 +1,11 @@
+<div class="wrap-pizza">
+  <h1 class="pizza__title">pizza</h1>
+  <div class="content">
+    <div fxLayout="row wrap" fxLayoutGap="0 grid">
+      <app-card fxFlex.gt-sm="33%" fxFlex.gt-xs="50%" *ngFor="let pizzaItem of pizzaArray"
+                [pizzaItem]="pizzaItem" ></app-card>
+    </div>
+  </div>
+
+</div>
+
