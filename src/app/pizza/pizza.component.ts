@@ -7,17 +7,24 @@ import {PizzaService} from "../pizza-service.service";
   styleUrls: ['./pizza.component.scss']
 })
 export class PizzaComponent implements OnInit {
-  pizzaArray:[] | any;
+  pizzaArray: [] | any;
+
 
   constructor(public pizzaServ: PizzaService) {
-    console.log(this.pizzaArray);
   }
+
+  setDataToStorage(arrayForOrderData:[] | any,array:[] | any){
+    if (sessionStorage.getItem("orderData") === null) {
+      sessionStorage.setItem("orderData", JSON.stringify([arrayForOrderData]));
+    } else {
+      array = sessionStorage.getItem("orderData");
+      array = JSON.parse(array);
+      sessionStorage.setItem("orderData",JSON.stringify([...array, arrayForOrderData]));
+    }
+  }
+
   ngOnInit(): void {
     this.pizzaArray = this.pizzaServ.getArrayOfPizza();
   }
-
-
-
-
 
 }

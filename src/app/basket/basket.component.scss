@@ -1,3 +1,47 @@
-p{
+.title-basket {
   font-size: 30pt;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 30px;
 }
+
+.content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.wrap-content {
+  border-radius: 15px;
+  box-shadow: 0 0 5px black;
+
+}
+
+.wrap-content__title {
+  font-size: 20pt;
+  display: flex;
+}
+
+.title-product {
+  flex: 1 0 65%;
+  p {
+    padding: 30px 0 30px 55px;
+  }
+}
+
+.title_money {
+  display: flex;
+  flex: 1 1 35%;
+  justify-content: space-between;
+  margin: 30px 50px 30px 0;
+}
+@media (max-width: 920px) {
+  .wrap-content {
+    box-shadow: none;
+  }
+  .wrap-content__title {
+    display: none;
+  }
+}
+
+

@@ -20,6 +20,8 @@ import {MatCardModule} from "@angular/material/card";
 import {FlexLayoutModule, FlexModule} from "@angular/flex-layout";
 import {MatButtonModule} from "@angular/material/button";
 import {PizzaService} from "./pizza-service.service";
+import {OrderService} from "./order.service";
+import { CardBasketComponent } from './basket/card-basket/card-basket.component';
 const appRoutes: Routes = [
   {path:'',component: PizzaComponent},
   {path:'pizza',component: PizzaComponent},
@@ -47,6 +49,7 @@ const appRoutes: Routes = [
     BasketComponent,
     CardComponent,
     NotFoundComponent,
+    CardBasketComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,7 +60,7 @@ const appRoutes: Routes = [
     MatButtonModule,
 
   ],
-  providers: [PizzaService],
+  providers: [PizzaService,OrderService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

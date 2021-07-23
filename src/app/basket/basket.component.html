@@ -1,1 +1,18 @@
-<p>basket works!</p>
+<div class="content">
+  <p class="title-basket">basket</p>
+  <div class="wrap-content">
+    <div class="wrap-content__title">
+      <div class="title-product"><p>Product</p></div>
+      <div class="title_money">
+        <div class="title-price">Price</div>
+        <div class="title-amount">Count</div>
+        <div class="title-total">Total</div>
+      </div>
+    </div>
+    <div class="wrap-content__body">
+          <app-card-basket  [changeCounts] = "changeCounts" *ngFor="let order of orderArray" [order] = "order" ></app-card-basket>
+    </div>
+  </div>
+</div>
+
+

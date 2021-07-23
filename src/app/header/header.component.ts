@@ -3,7 +3,7 @@ import {Component, OnInit} from '@angular/core';
 export interface navItem {
   title: string,
   image: string,
-  path:string
+  path: string
 }
 
 @Component({
@@ -16,10 +16,12 @@ export class HeaderComponent implements OnInit {
 
   constructor() {
   }
+
   showMenu: boolean = false;
-   public  closeMenu = ()=>{
-    this.showMenu= false;
+  public closeMenu = () => {
+    this.showMenu = false;
   };
+
   ngOnInit(): void {
 
 

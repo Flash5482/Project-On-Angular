@@ -3,7 +3,7 @@
   <div class="content">
     <div fxLayout="row wrap" fxLayoutGap="0 grid">
       <app-card fxFlex.gt-sm="33%" fxFlex.gt-xs="50%" *ngFor="let pizzaItem of pizzaArray"
-                [pizzaItem]="pizzaItem" ></app-card>
+                [pizzaItem]="pizzaItem" [setDataToStorage]="setDataToStorage"></app-card>
     </div>
   </div>
 

@@ -15,13 +15,13 @@
       </div>
       <div class="pizza__pay-count">
         <div (click)="changeCount('-')" class="minus"><span></span></div>
-        <input (input)="countInInput($event)" [value]="countOfPizza" name="" id="" cols="2" rows="1">
+        <input min="1" maxlength="3" (input)="countInInput($event)" [value]="countOfPizza" name="" id="" cols="2" rows="1">
         <div (click)="changeCount('+')"  class="plus" ><span></span>
         </div>
       </div>
     </div>
     <div class="pizza__pay-button">
-      <button (click)="setPrice(pizzaItem.price,countOfPizza)">Add to basket</button>
+      <button (click)="setOrder(pizzaItem.price,countOfPizza,pizzaItem.title,pizzaItem.img)">Add to basket</button>
     </div>
   </div>
 
