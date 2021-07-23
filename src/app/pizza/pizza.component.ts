@@ -13,13 +13,20 @@ export class PizzaComponent implements OnInit {
   constructor(public pizzaServ: PizzaService) {
   }
 
-  setDataToStorage(arrayForOrderData:[] | any,array:[] | any){
+  setDataToStorage(arrayForOrderData: [] | any, array: [] | any) {
     if (sessionStorage.getItem("orderData") === null) {
       sessionStorage.setItem("orderData", JSON.stringify([arrayForOrderData]));
     } else {
       array = sessionStorage.getItem("orderData");
       array = JSON.parse(array);
-      sessionStorage.setItem("orderData",JSON.stringify([...array, arrayForOrderData]));
+      const productOne = array.find((item: any) => item.title === arrayForOrderData.title);
+      if (productOne) {
+        productOne.count += arrayForOrderData.count;
+        sessionStorage.setItem("orderData", JSON.stringify(array));
+      } else {
+        sessionStorage.setItem("orderData", JSON.stringify([...array, arrayForOrderData]));
+      }
+      //sessionStorage.setItem("orderData",JSON.stringify([...array, arrayForOrderData]));
     }
   }
 

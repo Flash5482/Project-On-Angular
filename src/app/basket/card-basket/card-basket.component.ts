@@ -26,27 +26,7 @@ export class CardBasketComponent implements OnInit {
     }
   };
 
-  changeCount(symbol: string) {
-    switch (symbol) {
-      case '+': {
-        this.changeCounts();
-        this.countOfPizza++;
-        if (this.countOfPizza > 200) {
-          this.countOfPizza = 200;
-        }
-        break;
-      }
-      case '-': {
-        this.countOfPizza--;
-        if (this.countOfPizza < 1) {
-          this.countOfPizza = 1;
-        }
-        break;
-      }
-      default:
-        break;
-    }
-  }
+
 
 
 }

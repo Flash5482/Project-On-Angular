@@ -35,7 +35,6 @@ export class CardComponent implements OnInit {
 
 
   setOrder(price: any, count: any, title: string, img: string) {
-    //this.sumPrice = price * count;
     this.arrayForOrderData = {
       price,
       count,

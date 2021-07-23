@@ -11,10 +11,10 @@
         <div class="information-product-info__wrap">
           <div class="price-product__price"><p>{{order.price}} UAH</p></div>
           <div class="pizza__pay-count">
-            <div (click)="changeCount('-')" class="pizza__pay-count__minus"><span></span></div>
-            <input (input)="countInInput($event)" min="1" maxlength="3" [value]="order.count" name="" id="" cols="2"
+            <div (click)="changeCounts('-',order.title)" class="pizza__pay-count__minus"><span></span></div>
+            <input (input)="changeCounts($event,order.title)" min="1" maxlength="3" [value]="order.count" name="" id="" cols="2"
                    rows="1">
-            <div (click)="changeCount('+')" class="pizza__pay-count__plus"><span></span>
+            <div (click)="changeCounts('+',order.title)" class="pizza__pay-count__plus"><span></span>
             </div>
           </div>
           <div class="price-product__total"><p class="total">Total: </p>{{order.price * order.count}}</div>
