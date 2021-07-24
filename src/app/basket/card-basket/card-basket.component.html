@@ -5,6 +5,13 @@
         <img src="{{order.img}}" alt="">
       </div>
       <div class="information-product-info">
+        <a routerLink="/basket">
+          <div (click)="deleteProductFromOrder(order.title)" class="delete-product">
+            <div class="delete-product__button">
+              <span></span>
+            </div>
+          </div>
+        </a>
         <div class="title">
           <p>{{order.title}}</p>
         </div>
@@ -12,7 +19,8 @@
           <div class="price-product__price"><p>{{order.price}} UAH</p></div>
           <div class="pizza__pay-count">
             <div (click)="changeCounts('-',order.title)" class="pizza__pay-count__minus"><span></span></div>
-            <input (input)="changeCounts($event,order.title)" min="1" maxlength="3" [value]="order.count" name="" id="" cols="2"
+            <input (input)="changeCounts($event,order.title)" min="1" maxlength="3" [value]="order.count" name="" id=""
+                   cols="2"
                    rows="1">
             <div (click)="changeCounts('+',order.title)" class="pizza__pay-count__plus"><span></span>
             </div>

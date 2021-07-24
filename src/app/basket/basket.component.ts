@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {OrderService} from "../order.service";
 
 @Component({
@@ -6,14 +6,26 @@ import {OrderService} from "../order.service";
   templateUrl: './basket.component.html',
   styleUrls: ['./basket.component.scss']
 })
-export class BasketComponent implements OnInit {
+export class BasketComponent implements OnInit, OnChanges {
   orderArray: any;
 
   constructor(private service: OrderService) {
-    //this.orderArray=this.service.getOrderData();
+
     this.orderArray = sessionStorage.getItem("orderData");
     this.orderArray = JSON.parse(this.orderArray);
     console.log(this.orderArray);
+  }
+
+  ngOnInit(): void {
+  }
+
+  deleteProductFromOrder = (title: any) => {
+    this.orderArray = this.orderArray.filter((item: any) => item.title !== title);
+    sessionStorage.setItem("orderData", JSON.stringify(this.orderArray));
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log("Change " + changes);
   }
 
   changeCounts = (symbol: any, title: string) => {
@@ -43,7 +55,5 @@ export class BasketComponent implements OnInit {
     sessionStorage.setItem("orderData", JSON.stringify(this.orderArray));
   }
 
-  ngOnInit(): void {
-  }
 
 }

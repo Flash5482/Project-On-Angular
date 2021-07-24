@@ -12,21 +12,21 @@ export class PizzaComponent implements OnInit {
 
   constructor(public pizzaServ: PizzaService) {
   }
+  array: [] | any;
+  setDataToStorage(arrayForOrderData: [] | any) {
 
-  setDataToStorage(arrayForOrderData: [] | any, array: [] | any) {
     if (sessionStorage.getItem("orderData") === null) {
       sessionStorage.setItem("orderData", JSON.stringify([arrayForOrderData]));
     } else {
-      array = sessionStorage.getItem("orderData");
-      array = JSON.parse(array);
-      const productOne = array.find((item: any) => item.title === arrayForOrderData.title);
+      this.array = sessionStorage.getItem("orderData");
+      this.array = JSON.parse( this.array);
+      const productOne =  this.array.find((item: any) => item.title === arrayForOrderData.title);
       if (productOne) {
         productOne.count += arrayForOrderData.count;
-        sessionStorage.setItem("orderData", JSON.stringify(array));
+        sessionStorage.setItem("orderData", JSON.stringify( this.array));
       } else {
-        sessionStorage.setItem("orderData", JSON.stringify([...array, arrayForOrderData]));
+        sessionStorage.setItem("orderData", JSON.stringify([...this.array, arrayForOrderData]));
       }
-      //sessionStorage.setItem("orderData",JSON.stringify([...array, arrayForOrderData]));
     }
   }
 

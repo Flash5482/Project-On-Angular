@@ -28,7 +28,6 @@ export class CardComponent implements OnInit {
   }
 
   countOfPizza: number = 1;
-  sumPrice: number = 0;
 
   public arrayForOrderData = {};
   public array: [] | any;
@@ -41,7 +40,7 @@ export class CardComponent implements OnInit {
       title,
       img,
     };
-    this.setDataToStorage(this.arrayForOrderData, this.array);
+    this.setDataToStorage(this.arrayForOrderData);
   }
 
   countInInput(event: any) {

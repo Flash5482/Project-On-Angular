@@ -10,7 +10,7 @@
       </div>
     </div>
     <div class="wrap-content__body">
-          <app-card-basket  [changeCounts] = "changeCounts" *ngFor="let order of orderArray" [order] = "order" ></app-card-basket>
+          <app-card-basket [deleteProductFromOrder]="deleteProductFromOrder" [changeCounts] = "changeCounts" *ngFor="let order of orderArray"  [order] = "order" ></app-card-basket>
     </div>
   </div>
 </div>

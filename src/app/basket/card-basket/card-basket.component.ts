@@ -9,24 +9,14 @@ import {BasketComponent} from "../basket.component";
 export class CardBasketComponent implements OnInit {
   @Input() order: BasketComponent | any;
   @Input() changeCounts: BasketComponent | any;
+  @Input() deleteProductFromOrder: BasketComponent | any;
+  @Input() orderArray: BasketComponent | any;
 
 
   countOfPizza: number = 1;
   constructor() {
   }
-
   ngOnInit(): void {
   }
-
-  countInInput(event: any) {
-    const value = event.target.value;
-    this.countOfPizza = value;
-    if (value < 1) {
-      this.countOfPizza = 1;
-    }
-  };
-
-
-
 
 }
