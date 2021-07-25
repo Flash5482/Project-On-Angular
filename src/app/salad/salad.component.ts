@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {PizzaService} from "../pizza-service.service";
 
 @Component({
   selector: 'app-salad',
@@ -7,7 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SaladComponent implements OnInit {
 
-  constructor() { }
+  saladArray: [] | any;
+  setDataToStorage: any;
+  constructor(public pizzaServ: PizzaService) {
+    this.setDataToStorage = this.pizzaServ.setDataToStorage;
+    this.pizzaServ.search().subscribe(response => {
+      this.saladArray = response;
+      this.saladArray = this.saladArray.filter((item: any) => item.type === "salad");
+    });
+  }
 
   ngOnInit(): void {
   }

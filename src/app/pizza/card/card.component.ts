@@ -19,19 +19,15 @@ export class CardComponent implements OnInit {
   @Input() getDataOfPizza: PizzaComponent | any;
   @Input() setDataToStorage: PizzaComponent | any;
 
+  countOfPizza: number = 1;
+  public arrayForOrderData = {};
+  public array: [] | any;
 
   constructor(private service: OrderService) {
-
   }
 
   ngOnInit(): void {
   }
-
-  countOfPizza: number = 1;
-
-  public arrayForOrderData = {};
-  public array: [] | any;
-
 
   setOrder(price: any, count: any, title: string, img: string) {
     this.arrayForOrderData = {
