@@ -8,6 +8,7 @@
   </div>
 
   <app-nav *ngFor="let iterItem of navItems" [closeMenu]="closeMenu"  [navItem]="iterItem" [showNav]="showMenu"></app-nav>
+  <div *ngIf="this.service.showCircle" class="redCircle"></div>
 
 </div>
 <div (click)="moveMenu()" class="menu__burger" [ngClass]="{active:showMenu}">

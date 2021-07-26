@@ -1,1 +1,11 @@
-<p>drinks works!</p>
+<div class="wrap-drinks">
+  <h1 class="drinks__title">drinks</h1>
+  <div class="content">
+    <div fxLayout="row wrap" fxLayoutGap="0 grid">
+      <app-card fxFlex.gt-sm="33%" fxFlex.gt-xs="50%" *ngFor="let drinksArray of drinksArray"
+                [pizzaItem]="drinksArray" [setDataToStorage]="setDataToStorage" ></app-card>
+    </div>
+  </div>
+
+</div>
+

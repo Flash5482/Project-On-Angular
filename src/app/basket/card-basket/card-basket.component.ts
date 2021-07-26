@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {BasketComponent} from "../basket.component";
 
 @Component({
@@ -9,14 +9,16 @@ import {BasketComponent} from "../basket.component";
 export class CardBasketComponent implements OnInit {
   @Input() order: BasketComponent | any;
   @Input() changeCounts: BasketComponent | any;
-  @Input() deleteProductFromOrder: BasketComponent | any;
   @Input() orderArray: BasketComponent | any;
+  @Output() getOrderArrayStatusChange = new EventEmitter();
 
-
-  countOfPizza: number = 1;
   constructor() {
   }
   ngOnInit(): void {
   }
-
+  deleteProductFromOrder(title: any){
+    this.orderArray = this.orderArray.filter((item: any) => item.title !== title);
+    sessionStorage.setItem("orderData", JSON.stringify(this.orderArray));
+    this.getOrderArrayStatusChange.emit(this.orderArray);
+  }
 }

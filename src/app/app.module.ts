@@ -22,7 +22,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {PizzaService} from "./pizza-service.service";
 import {OrderService} from "./order.service";
 import { CardBasketComponent } from './basket/card-basket/card-basket.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 const appRoutes: Routes = [
   {path:'',component: PizzaComponent},
@@ -58,6 +58,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     MatToolbarModule,
     MatCardModule,
     FlexLayoutModule,

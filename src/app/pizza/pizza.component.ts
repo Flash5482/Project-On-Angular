@@ -9,7 +9,7 @@ import {PizzaService} from "../pizza-service.service";
 export class PizzaComponent implements OnInit {
   pizzaArray: [] | any;
 
-      setDataToStorage: any;
+  setDataToStorage: any;
 
   constructor(public pizzaServ: PizzaService) {
     this.setDataToStorage = this.pizzaServ.setDataToStorage;

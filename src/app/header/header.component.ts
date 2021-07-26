@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {PizzaService} from "../pizza-service.service";
 
 export interface navItem {
   title: string,
@@ -13,17 +14,24 @@ export interface navItem {
 })
 export class HeaderComponent implements OnInit {
 
+  showMenu: boolean = false;
+  orderArray: any;
 
-  constructor() {
+
+  constructor(public service: PizzaService) {
   }
 
-  showMenu: boolean = false;
   public closeMenu = () => {
     this.showMenu = false;
   };
 
   ngOnInit(): void {
+    this.orderArray = sessionStorage.getItem("orderData");
+    this.orderArray = JSON.parse(this.orderArray);
 
+    if (this.orderArray.length > 0) {
+      this.service.showCircle = true;
+    } else this.service.showCircle = false;
 
   }
 

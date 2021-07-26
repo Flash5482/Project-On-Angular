@@ -10,9 +10,19 @@
       </div>
     </div>
     <div class="wrap-content__body">
-          <app-card-basket [deleteProductFromOrder]="deleteProductFromOrder" [changeCounts] = "changeCounts" *ngFor="let order of orderArray"  [order] = "order" ></app-card-basket>
+      <app-card-basket (getOrderArrayStatusChange)="elementDelete($event)" [changeCounts]="changeCounts"
+                       *ngFor="let order of orderArray" [orderArray] = "orderArray" [order]="order"></app-card-basket>
+    </div>
+    <div  class="total">
+      <p >Total:  {{totalPrice}}</p>
     </div>
   </div>
+<div class="create-order">
+  <form action="">
+
+  </form>
+</div>
+
 </div>
 
 

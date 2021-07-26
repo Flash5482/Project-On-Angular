@@ -13,16 +13,19 @@ interface Pizza {
 })
 export class PizzaService {
   array: [] | any;
-
+  pizzaArray: [] | any;
+  showCircle: boolean = false;
   constructor(private http: HttpClient) {
+
   }
+
 
   search() {
     return this.http.get('http://localhost:8080/products');
   }
 
-  setDataToStorage(arrayForOrderData: [] | any) {
 
+  setDataToStorage(arrayForOrderData: [] | any) {
     if (sessionStorage.getItem("orderData") === null) {
       sessionStorage.setItem("orderData", JSON.stringify([arrayForOrderData]));
     } else {
@@ -36,7 +39,12 @@ export class PizzaService {
         sessionStorage.setItem("orderData", JSON.stringify([...this.array, arrayForOrderData]));
       }
     }
+
+   this.showCircle = true;
+
   }
+
+
 
 
   arrayOfPizza: Pizza[] = [
@@ -119,6 +127,7 @@ export class PizzaService {
       img: "./assets/img/Polo.png"
     },
   ];
+
   async getArrayOfPizza() {
     return this.array;
   }

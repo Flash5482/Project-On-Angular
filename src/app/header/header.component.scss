@@ -4,7 +4,16 @@
   background: #2f2424;
   display: flex;
 }
-
+.redCircle{
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: brown;
+  position: absolute;
+  right: 10px;
+  top: 15px;
+  z-index: 20;
+}
 .wrap-header {
   @include header;
 
