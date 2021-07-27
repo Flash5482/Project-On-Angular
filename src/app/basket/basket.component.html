@@ -11,17 +11,59 @@
     </div>
     <div class="wrap-content__body">
       <app-card-basket (getOrderArrayStatusChange)="elementDelete($event)" [changeCounts]="changeCounts"
-                       *ngFor="let order of orderArray" [orderArray] = "orderArray" [order]="order"></app-card-basket>
+                       *ngFor="let order of orderArray" [orderArray]="orderArray" [order]="order"></app-card-basket>
     </div>
-    <div  class="total">
-      <p >Total:  {{totalPrice}}</p>
+    <div class="total">
+      <div class="total__item" *ngIf="ifExitOrder; else unset ">Total:
+        <div class="found-order">{{totalPrice}}</div>
+      </div>
+      <ng-template #unset><p class="not-found-order">The cart is empty.</p></ng-template>
     </div>
   </div>
-<div class="create-order">
-  <form action="">
 
-  </form>
-</div>
+  <div *ngIf="ifExitOrder " class="choose-method">
+    <p class="choose-method__title">Choose the delivery method</p>
+    <div class="wrap__item">
+      <div (click)="setDelivery()" class="choose-method__item">
+        <div class="circle">
+          <div *ngIf="delivery" class="circle__fill"></div>
+        </div>
+        <p>Delivery</p>
+      </div>
+      <div (click)="setPickup()" class="choose-method__item">
+        <div class="circle">
+          <div *ngIf="pickup" class="circle__fill"></div>
+        </div>
+        <p>Pickup</p>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="ifExitOrder " class="create-order">
+    <div [formGroup]="orderForm" class="wrap-form" (ngSubmit)="onSubmit()">
+      <input placeholder="Your name" formControlName="name" type="text">
+      <input placeholder="Your phone number" formControlName="phoneNumber" type="text">
+      <textarea placeholder="Comments" formControlName="comment" type="text">
+        </textarea>
+      <div *ngIf="delivery" class="block-address" formGroupName="address">
+
+        <select formControlName="city" name="" id="">
+          <option *ngFor="let city of arrayOfCity;" value="City">
+            {{city}}
+          </option>
+        </select>
+
+        <input placeholder="street" formControlName="street" type="text" maxlength="42">
+        <input placeholder="House number" formControlName="houseNumber" type="text" maxlength="4">
+      </div>
+
+    </div>
+
+  </div>
+
+  <div *ngIf="ifExitOrder " class="button-make-order">
+    <div class="button"><button>Make an order</button></div>
+  </div>
 
 </div>
 

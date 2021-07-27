@@ -53,10 +53,6 @@ export class HeaderComponent implements OnInit {
       image: "assets/img/cocktail.svg",
       path: "drinks"
     }, {
-      title: "Payment",
-      image: "assets/img/wallet.svg",
-      path: "payment"
-    }, {
       title: "Basket",
       image: "assets/img/shopping-cart.svg",
       path: "basket"

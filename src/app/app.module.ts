@@ -11,7 +11,6 @@ import {Routes, RouterModule} from '@angular/router';
 import { SaladComponent } from './salad/salad.component';
 import { DrinksComponent } from './drinks/drinks.component';
 import { DessertComponent } from './dessert/dessert.component';
-import { PaymentComponent } from './payment/payment.component';
 import { BasketComponent } from './basket/basket.component';
 import { CardComponent } from './pizza/card/card.component';
 import { NotFoundComponent } from './not-found/not-found.component';
@@ -30,7 +29,6 @@ const appRoutes: Routes = [
   {path:'salad',component:SaladComponent},
   {path:'drinks',component:DrinksComponent},
   {path:'dessert',component:DessertComponent},
-  {path:'payment',component:PaymentComponent},
   {path:'basket',component:BasketComponent},
   {path:'**',component:NotFoundComponent}
 
@@ -47,7 +45,6 @@ const appRoutes: Routes = [
     SaladComponent,
     DrinksComponent,
     DessertComponent,
-    PaymentComponent,
     BasketComponent,
     CardComponent,
     NotFoundComponent,
