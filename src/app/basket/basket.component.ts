@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {OrderService} from "../order.service";
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-basket',
@@ -13,12 +13,16 @@ export class BasketComponent implements OnInit {
   totalPrice: any;
   delivery: boolean = true;
   pickup: boolean = false;
+  buttonHover: boolean = false;
 
+  orderForm: FormGroup | any;
+  o: any;
   arrayOfCity = [
     "Ivano-Frankivsk",
     "Lviv",
     "Kiev"
   ];
+
   constructor(private service: OrderService) {
 
     this.orderArray = sessionStorage.getItem("orderData");
@@ -29,34 +33,68 @@ export class BasketComponent implements OnInit {
       this.ifExitOrder = false;
     } else this.ifExitOrder = true;
   }
+
+
   ngOnInit(): void {
+    this.orderForm = new FormGroup({
+      phoneNumber: new FormControl('',
+        [Validators.required, Validators.minLength(10), Validators.maxLength(10)]),
+      name: new FormControl('', [Validators.required, Validators.minLength(2),]),
+      comment: new FormControl('', [Validators.maxLength(200)]),
+      address: new FormGroup(
+        {
+          city: new FormControl('Ivano-Frankivsk'),
+          street: new FormControl('', [Validators.required]),
+          houseNumber: new FormControl('', [Validators.required])
+        }
+      )
+    });
+    this.orderForm.valueChanges.subscribe((status: any) => console.log(status));
+    console.log(this.orderForm.get('name').statusChanges.subscribe((status: any) => console.log(status)));
   }
 
-
-  orderForm = new FormGroup({
-    phoneNumber: new FormControl(''),
-    name: new FormControl(''),
-    comment: new FormControl(''),
-    address: new FormGroup(
-      {
-        city: new FormControl(''),
-        street: new FormControl(''),
-        houseNumber: new FormControl('')
-      }
-    )
-
-  });
-
-
-  setDelivery(){
-    this.delivery=true;
-    this.pickup=false;
+  get name() {
+    return this.orderForm.get('name');
   }
-  setPickup(){
-    this.delivery=false;
-    this.pickup=true;
+
+  get phoneNumber() {
+    return this.orderForm.get('phoneNumber');
   }
-  onSubmit(){
+
+  get houseNumber() {
+    return this.orderForm.get('address').get('houseNumber');
+  }
+
+  get street() {
+    return this.orderForm.get('address').get('street');
+  }
+
+  onSubmit() {
+    console.log(this.orderForm);
+    alert(this.orderForm.get("address").get('city').Value)
+  }
+
+  setDelivery() {
+    this.delivery = true;
+    this.pickup = false;
+
+    this.orderForm.get('address').setValue({
+      city:"",
+      street: "",
+      houseNumber: ""
+    });
+  }
+
+  setPickup() {
+    this.delivery = false;
+    this.pickup = true;
+
+    this.orderForm.get('address').setValue({
+      city:"sss",
+      street: "ssss",
+      houseNumber: "de"
+
+    });
 
   }
 
@@ -69,7 +107,6 @@ export class BasketComponent implements OnInit {
     if (this.orderArray.length > 0) {
       this.totalPrice = this.orderArray.reduce((current: number, nex: any) => current + nex.price * nex.count, 0
       );
-      console.log(this.orderArray.reduce((current: number, nex: any) => current + nex.price));
     } else {
       this.totalPrice = 0;
     }

@@ -40,30 +40,75 @@
   </div>
 
   <div *ngIf="ifExitOrder " class="create-order">
-    <div [formGroup]="orderForm" class="wrap-form" (ngSubmit)="onSubmit()">
-      <input placeholder="Your name" formControlName="name" type="text">
-      <input placeholder="Your phone number" formControlName="phoneNumber" type="text">
+    <form [formGroup]="orderForm" class="wrap-form" (ngSubmit)='onSubmit()'>
+
+      <div *ngIf="name.invalid && name.touched" class="validateName">
+        <div *ngIf="name.errors?.required">
+          Name is required.
+        </div>
+        <div *ngIf="name.errors?.minlength">
+          Name must be at least 4 characters long.
+        </div>
+      </div>
+
+      <input
+        onkeypress="return (event.charCode >=65  && event.charCode <=90 || (event.charCode >= 95 && event.charCode <= 122) ||
+         (event.charCode >=1000 && event.charCode <= 1100) )"
+        [ngClass]="{inputValidate: name.invalid &&(name.touched)}" name="name" id="name" maxlength="45"
+        placeholder="Your name"
+        formControlName="name" type="text">
+
+
+      <div *ngIf="phoneNumber.invalid && phoneNumber.touched" class="validateName">
+        <div *ngIf="phoneNumber.errors?.required">
+          Phone is required.
+        </div>
+        <div *ngIf="phoneNumber.errors?.minlength">
+          Phone must have 10 numbers
+        </div>
+      </div>
+
+      <input
+        onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"
+        [ngClass]="{inputValidate: phoneNumber.invalid &&(phoneNumber.touched)}"
+        maxlength="10"
+        placeholder="Your phone number" formControlName="phoneNumber" type=”number”>
+
       <textarea placeholder="Comments" formControlName="comment" type="text">
         </textarea>
       <div *ngIf="delivery" class="block-address" formGroupName="address">
 
         <select formControlName="city" name="" id="">
-          <option *ngFor="let city of arrayOfCity;" value="City">
+          <option *ngFor="let city of arrayOfCity;" >
             {{city}}
           </option>
         </select>
 
-        <input placeholder="street" formControlName="street" type="text" maxlength="42">
-        <input placeholder="House number" formControlName="houseNumber" type="text" maxlength="4">
+        <input [ngClass]="{inputValidate: street.invalid &&(street.touched)}" placeholder="street"
+               formControlName="street" type="text" maxlength="42">
+
+
+
+        <input [ngClass]="{inputValidate: houseNumber.invalid &&(houseNumber.touched)}"
+               placeholder="House number" formControlName="houseNumber" type="text" maxlength="4">
+
+        <div *ngIf="houseNumber.invalid && houseNumber.touched" class="validateAddress">
+          <div *ngIf="houseNumber.errors?.required">
+            House number is required.
+          </div>
+        </div>
       </div>
-
-    </div>
+      <div *ngIf="ifExitOrder " class="button-make-order">
+        <div class="button-wrapper " [ngClass]="{buttonHover: orderForm.valid }">
+          <button class="button" [ngClass]="{button2: orderForm.valid}" type="submit" [disabled]="!orderForm.valid">Make
+            an order
+          </button>
+        </div>
+      </div>
+    </form>
 
   </div>
 
-  <div *ngIf="ifExitOrder " class="button-make-order">
-    <div class="button"><button>Make an order</button></div>
-  </div>
 
 </div>
 

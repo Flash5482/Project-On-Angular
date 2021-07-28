@@ -1,4 +1,5 @@
 @mixin setStyleInput {
+  transition: 500ms;
   border-radius: 10px;
   margin: 10px 0;
   display: block;
@@ -140,7 +141,10 @@
   width: 95%;
   margin: 0 auto;
   padding: 30px 50px 30px 50px;
-
+  .inputValidate{
+    border: 2px solid rgba(165, 42, 42, 1);
+    color:  rgba(165, 42, 42, 1);
+  }
   input {
     @include setStyleInput;
     font-size: 13pt;
@@ -188,6 +192,7 @@
     }
 
     input {
+
       &:nth-child(2) {
         margin-left: 20px;
       }
@@ -211,6 +216,7 @@
     flex-direction: column;
 
     input {
+
       &:nth-child(2) {
         margin-left: 0 !important;
       }
@@ -227,30 +233,34 @@
 .button-make-order {
   width: 100%;
 
-  .button {
+  .button-wrapper {
     max-width: 300px;
     height: 50px;
-    margin: 0 auto 30px;
+    margin: 30px auto 30px auto;
     transition: 400ms;
 
-    button {
+    .button {
       transition: 500ms;
       border-radius: 10px;
-      background: brown;
+      background: #660909;
       color: white;
       font-size: 15pt;
       width: 100%;
       height: 100%;
+    }
+
+    .button2 {
+      background: brown;
 
       &:hover {
         background: white;
         box-shadow: 0 0 10px brown;
         color: brown;
-
       }
-
     }
+  }
 
+  .buttonHover {
     &:hover {
       max-width: 400px;
       transition-property: all;
@@ -259,5 +269,10 @@
       transition-timing-function: cubic-bezier(0.75, -1, 0.21, -1);
     }
   }
+}
+.validateAddress{
+  right: 40px;
+  bottom: -140px;
+  position: absolute;
 }
 
