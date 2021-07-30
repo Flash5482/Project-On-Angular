@@ -1,6 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {PizzaComponent} from "../pizza.component";
-import {OrderService} from "../../order.service";
+import {PizzaService} from "../../pizza-service.service";
 
 interface OrderPizza {
   titles: string,
@@ -19,17 +19,20 @@ export class CardComponent implements OnInit {
   @Input() getDataOfPizza: PizzaComponent | any;
   @Input() setDataToStorage: PizzaComponent | any;
 
+
   countOfPizza: number = 1;
   public arrayForOrderData = {};
   public array: [] | any;
 
-  constructor(private service: OrderService) {
+  constructor( private servicePizza: PizzaService) {
   }
 
   ngOnInit(): void {
   }
 
   setOrder(price: any, count: any, title: string, img: string) {
+
+    this.servicePizza.showCircle = true;
     this.arrayForOrderData = {
       price,
       count,
@@ -37,6 +40,7 @@ export class CardComponent implements OnInit {
       img,
     };
     this.setDataToStorage(this.arrayForOrderData);
+
   }
 
   countInInput(event: any) {
@@ -54,6 +58,7 @@ export class CardComponent implements OnInit {
         if (this.countOfPizza > 200) {
           this.countOfPizza = 200;
         }
+
         break;
       }
       case '-': {

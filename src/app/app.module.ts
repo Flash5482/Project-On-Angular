@@ -23,7 +23,6 @@ import {OrderService} from "./order.service";
 import {CardBasketComponent} from './basket/card-basket/card-basket.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
-import { ValidateComponent } from './validate/validate.component';
 
 const appRoutes: Routes = [
   {path: '', component: PizzaComponent},
@@ -51,7 +50,6 @@ const appRoutes: Routes = [
     CardComponent,
     NotFoundComponent,
     CardBasketComponent,
-    ValidateComponent,
   ],
   imports: [
     BrowserModule,

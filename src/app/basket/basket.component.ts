@@ -16,7 +16,6 @@ export class BasketComponent implements OnInit {
   buttonHover: boolean = false;
 
   orderForm: FormGroup | any;
-  o: any;
   arrayOfCity = [
     "Ivano-Frankivsk",
     "Lviv",
@@ -24,14 +23,17 @@ export class BasketComponent implements OnInit {
   ];
 
   constructor(private service: OrderService) {
-
     this.orderArray = sessionStorage.getItem("orderData");
     this.orderArray = JSON.parse(this.orderArray);
-    this.getTotalPrice();
 
-    if (this.orderArray.length == 0) {
+    if(this.orderArray === null){
       this.ifExitOrder = false;
-    } else this.ifExitOrder = true;
+    }else{
+      this.getTotalPrice();
+      if (this.orderArray.length === 0 || this.orderArray.length === undefined ) {
+        this.ifExitOrder = false;
+      } else this.ifExitOrder = true;
+    }
   }
 
 
@@ -70,8 +72,8 @@ export class BasketComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.orderForm);
-    alert(this.orderForm.get("address").get('city').Value)
+    console.log(this.orderForm.value);
+
   }
 
   setDelivery() {
@@ -79,7 +81,7 @@ export class BasketComponent implements OnInit {
     this.pickup = false;
 
     this.orderForm.get('address').setValue({
-      city:"",
+      city: "",
       street: "",
       houseNumber: ""
     });
@@ -90,7 +92,7 @@ export class BasketComponent implements OnInit {
     this.pickup = true;
 
     this.orderForm.get('address').setValue({
-      city:"sss",
+      city: "sss",
       street: "ssss",
       houseNumber: "de"
 
@@ -101,6 +103,14 @@ export class BasketComponent implements OnInit {
 
   elementDelete(element: any) {
     this.orderArray = element;
+  }
+
+  elementDelete1(element: any) {
+    this.ifExitOrder = element;
+  }
+
+  changeTotalPrice(element: any) {
+    this.totalPrice = element;
   }
 
   getTotalPrice() {
@@ -126,7 +136,6 @@ export class BasketComponent implements OnInit {
         } else {
           product.count--;
         }
-
         break;
       }
       default: {

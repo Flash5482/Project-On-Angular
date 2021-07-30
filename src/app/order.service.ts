@@ -11,14 +11,7 @@ interface order{
 export class OrderService {
 
 
-  public pizzaOfData: Array<string> = [];
 
-  public setDataOfPizza = (data: any) => {
-    return this.pizzaOfData.push(data);
-  }
-  public getDataOfPizza = () => {
-    return this.pizzaOfData;
-  }
 
   constructor() { }
 

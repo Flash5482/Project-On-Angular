@@ -10,7 +10,10 @@
       </div>
     </div>
     <div class="wrap-content__body">
-      <app-card-basket (getOrderArrayStatusChange)="elementDelete($event)" [changeCounts]="changeCounts"
+      <app-card-basket [ifExitOrder]="this.ifExitOrder" (getIfExitOrderStatusChange)="elementDelete1($event)"
+                       (getOrderArrayStatusChange)="elementDelete($event)"
+                       (getTotalPriceStatusChange)="changeTotalPrice($event)" [changeCounts]="changeCounts"
+                       [totalPrice]="this.totalPrice"
                        *ngFor="let order of orderArray" [orderArray]="orderArray" [order]="order"></app-card-basket>
     </div>
     <div class="total">
@@ -79,15 +82,13 @@
       <div *ngIf="delivery" class="block-address" formGroupName="address">
 
         <select formControlName="city" name="" id="">
-          <option *ngFor="let city of arrayOfCity;" >
+          <option *ngFor="let city of arrayOfCity;">
             {{city}}
           </option>
         </select>
 
         <input [ngClass]="{inputValidate: street.invalid &&(street.touched)}" placeholder="street"
                formControlName="street" type="text" maxlength="42">
-
-
 
         <input [ngClass]="{inputValidate: houseNumber.invalid &&(houseNumber.touched)}"
                placeholder="House number" formControlName="houseNumber" type="text" maxlength="4">

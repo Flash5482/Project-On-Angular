@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import {PizzaService} from "./pizza-service.service";
 
 @Component({
   selector: 'app-root',
@@ -7,19 +6,11 @@ import {PizzaService} from "./pizza-service.service";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  orderArray: any;
-
-  constructor(public service: PizzaService) {
+  constructor() {
   }
   ngOnInit(): void {
-    this.orderArray = sessionStorage.getItem("orderData");
-    this.orderArray = JSON.parse(this.orderArray);
-
-    if (this.orderArray.length > 0) {
-      this.service.showCircle = true;
-    } else this.service.showCircle = false;
-
   }
+
 
   title = 'Project-On-Angular';
 }

@@ -5,13 +5,13 @@
         <img src="{{order.img}}" alt="">
       </div>
       <div class="information-product-info">
-        <a routerLink="/basket">
-          <div (click)="deleteProductFromOrder(order.title)" class="delete-product">
-            <div class="delete-product__button">
-              <span></span>
-            </div>
+
+        <div (click)="deleteProductFromOrder(order.title)" class="delete-product">
+          <div class="delete-product__button">
+            <span></span>
           </div>
-        </a>
+        </div>
+
         <div class="title">
           <p>{{order.title}}</p>
         </div>
@@ -25,7 +25,7 @@
             <div (click)="changeCounts('+',order.title)" class="pizza__pay-count__plus"><span></span>
             </div>
           </div>
-          <div class="price-product__total"><p class="total">Total: </p>{{order.price * order.count}}</div>
+          <div class="price-product__total">{{order.price * order.count}}</div>
         </div>
       </div>
     </div>

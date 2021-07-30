@@ -11,23 +11,24 @@ interface Pizza {
 @Injectable({
   providedIn: 'root'
 })
+
 export class PizzaService {
   array: [] | any;
   pizzaArray: [] | any;
-  showCircle: boolean = false;
+  public showCircle: boolean = false;
+
   constructor(private http: HttpClient) {
-
   }
-
 
   search() {
     return this.http.get('http://localhost:8080/products');
   }
 
-
   setDataToStorage(arrayForOrderData: [] | any) {
     if (sessionStorage.getItem("orderData") === null) {
       sessionStorage.setItem("orderData", JSON.stringify([arrayForOrderData]));
+      this.showCircle = true;
+
     } else {
       this.array = sessionStorage.getItem("orderData");
       this.array = JSON.parse(this.array);
@@ -39,12 +40,7 @@ export class PizzaService {
         sessionStorage.setItem("orderData", JSON.stringify([...this.array, arrayForOrderData]));
       }
     }
-
-   this.showCircle = true;
-
   }
-
-
 
 
   arrayOfPizza: Pizza[] = [
@@ -128,7 +124,5 @@ export class PizzaService {
     },
   ];
 
-  async getArrayOfPizza() {
-    return this.array;
-  }
+
 }

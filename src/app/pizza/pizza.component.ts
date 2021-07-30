@@ -8,7 +8,6 @@ import {PizzaService} from "../pizza-service.service";
 })
 export class PizzaComponent implements OnInit {
   pizzaArray: [] | any;
-
   setDataToStorage: any;
 
   constructor(public pizzaServ: PizzaService) {
@@ -17,10 +16,11 @@ export class PizzaComponent implements OnInit {
       this.pizzaArray = response;
       this.pizzaArray = this.pizzaArray.filter((item: any) => item.type === "pizza");
     });
+
+
   }
 
   ngOnInit(): void {
-
   }
 
 }
