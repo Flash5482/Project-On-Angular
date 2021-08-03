@@ -10,6 +10,9 @@ export class PizzaComponent implements OnInit {
   pizzaArray: [] | any;
   setDataToStorage: any;
 
+
+
+
   constructor(public pizzaServ: PizzaService) {
     this.setDataToStorage = this.pizzaServ.setDataToStorage;
     this.pizzaServ.search().subscribe(response => {

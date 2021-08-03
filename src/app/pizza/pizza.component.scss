@@ -1,7 +1,7 @@
 
 .wrap-pizza {
   max-width: 1400px;
-  margin: 0 auto;
+  margin: 150px auto 0 auto;
 
   .pizza__title {
     height: 100px;
@@ -18,7 +18,8 @@
     padding: 16px;
   }
 }
-.redCircle{
+
+.redCircle {
   width: 30px;
   height: 30px;
   border-radius: 50%;

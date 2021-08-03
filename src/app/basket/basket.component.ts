@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {OrderService} from "../order.service";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormControl, FormGroup,  Validators} from "@angular/forms";
+import {PizzaService} from "../pizza-service.service";
 
 @Component({
   selector: 'app-basket',
@@ -13,7 +13,11 @@ export class BasketComponent implements OnInit {
   totalPrice: any;
   delivery: boolean = true;
   pickup: boolean = false;
-  buttonHover: boolean = false;
+  title: string = '';
+  showWindowOnDelete: boolean = false;
+
+  value = 'Clear me';
+
 
   orderForm: FormGroup | any;
   arrayOfCity = [
@@ -22,15 +26,15 @@ export class BasketComponent implements OnInit {
     "Kiev"
   ];
 
-  constructor(private service: OrderService) {
+  constructor(public service: PizzaService) {
     this.orderArray = sessionStorage.getItem("orderData");
     this.orderArray = JSON.parse(this.orderArray);
 
-    if(this.orderArray === null){
+    if (this.orderArray === null) {
       this.ifExitOrder = false;
-    }else{
+    } else {
       this.getTotalPrice();
-      if (this.orderArray.length === 0 || this.orderArray.length === undefined ) {
+      if (this.orderArray.length === 0 || this.orderArray.length === undefined) {
         this.ifExitOrder = false;
       } else this.ifExitOrder = true;
     }
@@ -55,6 +59,7 @@ export class BasketComponent implements OnInit {
     console.log(this.orderForm.get('name').statusChanges.subscribe((status: any) => console.log(status)));
   }
 
+
   get name() {
     return this.orderForm.get('name');
   }
@@ -71,9 +76,37 @@ export class BasketComponent implements OnInit {
     return this.orderForm.get('address').get('street');
   }
 
+  objectOrder: any;
+
+  mergeArray(name: any, phone: any, comment: any, city: any, street: any, housenumber: any, product: any, price: any) {
+    return {
+      name, phone, comment, city, street, housenumber, product, price
+    }
+  }
+
   onSubmit() {
+    console.log(this.orderArray);
     console.log(this.orderForm.value);
 
+    this.objectOrder = this.mergeArray(
+      this.orderForm.get("name").value,
+      this.orderForm.get("phoneNumber").value,
+      this.orderForm.get("comment").value,
+      this.orderForm.get("address").get("city").value,
+      this.orderForm.get("address").get("street").value,
+      this.orderForm.get("address").get("houseNumber").value,
+      JSON.stringify(this.orderArray),
+      this.totalPrice);
+
+    console.log(this.objectOrder);
+
+
+    this.service.postOrder(this.objectOrder);
+
+  }
+
+  closeWindow() {
+    this.showWindowOnDelete = false;
   }
 
   setDelivery() {
@@ -151,5 +184,23 @@ export class BasketComponent implements OnInit {
     sessionStorage.setItem("orderData", JSON.stringify(this.orderArray));
   }
 
+  deleteProductFromBasket(element: any){
+    this.title = element;
+  };
+
+  deleteProductFromOrder  ()  {
+
+    if (this.orderArray.length === 1) {
+      this.service.showCircle = false;
+      this.ifExitOrder = false;
+    }
+
+    this.orderArray = this.orderArray.filter((item: any) => item.title !== this.title);
+    sessionStorage.setItem("orderData", JSON.stringify(this.orderArray));
+
+
+    this.totalPrice = this.orderArray.reduce((current: number, nex: any) => current + nex.price * nex.count, 0);
+    this.service.showWindowOnDelete = false;
+  }
 
 }

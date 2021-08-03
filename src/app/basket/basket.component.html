@@ -1,7 +1,20 @@
-<div class="content">
+
+
+<div (click)="service.closeWindowDelete()" [ngClass]="{'background-On-Delete' : service.showWindowOnDelete }"></div>
+<div class="window-on-delete" [ngClass]="{'window-on-delete':service.showWindowOnDelete}">
+  <div class="title">Are you sure?</div>
+  <div class="button">
+    <button class="button-yes" (click)="deleteProductFromOrder()">Yes</button>
+    <button class="button-no" (click)="service.closeWindowDelete()">No</button>
+  </div>
+</div>
+
+
+<div class="content" >
   <p class="title-basket">basket</p>
   <div class="wrap-content">
     <div class="wrap-content__title">
+
       <div class="title-product"><p>Product</p></div>
       <div class="title_money">
         <div class="title-price">Price</div>
@@ -10,9 +23,8 @@
       </div>
     </div>
     <div class="wrap-content__body">
-      <app-card-basket [ifExitOrder]="this.ifExitOrder" (getIfExitOrderStatusChange)="elementDelete1($event)"
-                       (getOrderArrayStatusChange)="elementDelete($event)"
-                       (getTotalPriceStatusChange)="changeTotalPrice($event)" [changeCounts]="changeCounts"
+      <app-card-basket [title]="title" (getTitle)="deleteProductFromBasket($event)"
+                       [changeCounts]="changeCounts"
                        [totalPrice]="this.totalPrice"
                        *ngFor="let order of orderArray" [orderArray]="orderArray" [order]="order"></app-card-basket>
     </div>
@@ -42,63 +54,76 @@
     </div>
   </div>
 
+
   <div *ngIf="ifExitOrder " class="create-order">
     <form [formGroup]="orderForm" class="wrap-form" (ngSubmit)='onSubmit()'>
 
-      <div *ngIf="name.invalid && name.touched" class="validateName">
-        <div *ngIf="name.errors?.required">
-          Name is required.
-        </div>
-        <div *ngIf="name.errors?.minlength">
-          Name must be at least 4 characters long.
-        </div>
-      </div>
+      <!--   onkeypress="return (event.charCode >=65  && event.charCode <=90 || (event.charCode >= 95 && event.charCode <= 122) ||
+         (event.charCode >=1000 && event.charCode <= 1100) )"-->
 
-      <input
-        onkeypress="return (event.charCode >=65  && event.charCode <=90 || (event.charCode >= 95 && event.charCode <= 122) ||
-         (event.charCode >=1000 && event.charCode <= 1100) )"
-        [ngClass]="{inputValidate: name.invalid &&(name.touched)}" name="name" id="name" maxlength="45"
-        placeholder="Your name"
-        formControlName="name" type="text">
+      <mat-form-field class="example-full-width" appearance="outline"  [ngStyle]="{borderRadius: '50px'}" >
+        <mat-label>Name</mat-label>
+        <input type="text" matInput formControlName="name" placeholder="Ex. Andrew" maxlength="45" >
+        <mat-error *ngIf="name.hasError('required')">
+          Name is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
 
-
-      <div *ngIf="phoneNumber.invalid && phoneNumber.touched" class="validateName">
-        <div *ngIf="phoneNumber.errors?.required">
-          Phone is required.
-        </div>
-        <div *ngIf="phoneNumber.errors?.minlength">
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Telephone</mat-label>
+        <span matPrefix>+38 &nbsp;</span>
+        <input
+          onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"
+          type="tel" formControlName="phoneNumber" maxlength="10" matInput placeholder="067-555-1234">
+        <mat-icon matSuffix></mat-icon>
+        <mat-error *ngIf="phoneNumber.hasError('minlength')">
           Phone must have 10 numbers
-        </div>
-      </div>
+        </mat-error>
+        <mat-error *ngIf="phoneNumber.hasError('required')">
+          Phone is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
 
-      <input
-        onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"
-        [ngClass]="{inputValidate: phoneNumber.invalid &&(phoneNumber.touched)}"
-        maxlength="10"
-        placeholder="Your phone number" formControlName="phoneNumber" type=”number”>
 
-      <textarea placeholder="Comments" formControlName="comment" type="text">
-        </textarea>
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Leave a comment</mat-label>
+        <textarea maxlength="250" matInput placeholder="Ex. It makes me feel..." formControlName="comment"></textarea>
+      </mat-form-field>
+
+
       <div *ngIf="delivery" class="block-address" formGroupName="address">
 
-        <select formControlName="city" name="" id="">
-          <option *ngFor="let city of arrayOfCity;">
-            {{city}}
-          </option>
-        </select>
 
-        <input [ngClass]="{inputValidate: street.invalid &&(street.touched)}" placeholder="street"
-               formControlName="street" type="text" maxlength="42">
 
-        <input [ngClass]="{inputValidate: houseNumber.invalid &&(houseNumber.touched)}"
-               placeholder="House number" formControlName="houseNumber" type="text" maxlength="4">
+        <mat-form-field appearance="outline">
+          <mat-label>City</mat-label>
+          <mat-select formControlName="city">
+            <mat-option *ngFor="let city of arrayOfCity" [value]="city" >
+              {{city}}
+            </mat-option>
 
-        <div *ngIf="houseNumber.invalid && houseNumber.touched" class="validateAddress">
-          <div *ngIf="houseNumber.errors?.required">
-            House number is required.
-          </div>
-        </div>
+          </mat-select>
+        </mat-form-field>
+
+
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>Street</mat-label>
+          <input type="text" matInput formControlName="street" placeholder="st. Baker" maxlength="45">
+          <mat-error *ngIf="street.hasError('required')">
+            Street is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>House number</mat-label>
+          <input class="houseNumber" type="text" matInput formControlName="houseNumber" placeholder="18D" maxlength="4">
+          <mat-error *ngIf="houseNumber.hasError('required')">
+            House number is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
       </div>
+
       <div *ngIf="ifExitOrder " class="button-make-order">
         <div class="button-wrapper " [ngClass]="{buttonHover: orderForm.valid }">
           <button class="button" [ngClass]="{button2: orderForm.valid}" type="submit" [disabled]="!orderForm.valid">Make
@@ -106,6 +131,7 @@
           </button>
         </div>
       </div>
+
     </form>
 
   </div>

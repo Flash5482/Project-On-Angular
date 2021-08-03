@@ -41,8 +41,10 @@
 
 .content {
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 150px auto 0 auto;
+
 }
+
 
 .wrap-content {
   border-radius: 15px;
@@ -141,58 +143,45 @@
   width: 95%;
   margin: 0 auto;
   padding: 30px 50px 30px 50px;
-  .inputValidate{
-    border: 2px solid rgba(165, 42, 42, 1);
-    color:  rgba(165, 42, 42, 1);
+
+
+
+  mat-form-field {
+    width: 100%;
+    font-size: 15pt;
+
+
+    input {
+      font-size: 15pt;
+    }
+
+    textarea {
+      font-size: 15pt;
+      resize: none;
+      height: 150px;
+      width: 100%;
+    }
   }
+
   input {
-    @include setStyleInput;
+    //@include setStyleInput;
     font-size: 13pt;
   }
 
-  textarea {
-    font-size: 15pt;
-    border-radius: 10px;
-    padding: 10px 10px;
-    resize: none;
-    height: 150px;
-    width: 100%;
-    border: 2px solid rgba(0, 0, 0, 0.2);
-  }
 
   .block-address {
     display: flex;
 
-    select {
-      font-size: 13pt;
-      @include setStyleInput;
 
-      option {
-        font-size: 15pt;
-        border-radius: 10px !important;
-
-        &:checked {
-          background: black !important;
-          color: white;
-
-        }
-
-        &:hover {
-          background: black !important;
-          color: white !important;
-          box-shadow: 0 0 10px 100px #fff inset;
-
-        }
-      }
-
-      option:hover {
-        background: black !important;
-        color: white;
-      }
+    .houseNumber{
+      width: 160px;
     }
-
-    input {
-
+    mat-form-field {
+      input{
+        border-radius: 10px;
+      }
+      border-radius: 10px;
+      font-size: 13pt;
       &:nth-child(2) {
         margin-left: 20px;
       }
@@ -215,7 +204,7 @@
   .block-address {
     flex-direction: column;
 
-    input {
+    mat-form-field {
 
       &:nth-child(2) {
         margin-left: 0 !important;
@@ -270,9 +259,85 @@
     }
   }
 }
-.validateAddress{
+
+.validateAddress {
   right: 40px;
   bottom: -140px;
   position: absolute;
+}
+
+
+.background-On-Delete {
+  transition: all 500ms;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 12;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.window-on-delete {
+  transition: 500ms;
+  position: fixed;
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 35;
+  align-items: center;
+  background: white;
+  width: 600px;
+  height: 200px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px white;
+
+  .title {
+    font-size: 20pt;
+    text-align: center;
+    margin: 50px 0 -70px 0;
+  }
+
+  .button {
+    margin-top: 130px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    button {
+      transition: 300ms;
+      font-size: 15pt;
+      width: 150px;
+      height: 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 7px black;
+    }
+
+    .button-yes {
+      background: #910202;
+      color: white;
+
+      &:hover {
+        background: white;
+        color: #910202;
+      }
+    }
+
+    .button-no {
+      background: #0c6e06;
+      color: white;
+
+      &:hover {
+        background: white;
+        color: #0c6e06;
+      }
+    }
+  }
+
 }
 

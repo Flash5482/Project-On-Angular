@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 
 interface Pizza {
   title: string,
@@ -16,12 +16,39 @@ export class PizzaService {
   array: [] | any;
   pizzaArray: [] | any;
   public showCircle: boolean = false;
+  public moveLine: boolean = false;
+  showWindowOnDelete: boolean = false;
+  overflowOnDelete: string = 'visible';
+
 
   constructor(private http: HttpClient) {
   }
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  };
 
   search() {
     return this.http.get('http://localhost:8080/products');
+  }
+  postOrder(order: any) {
+    return this.http.post('http://localhost:8080/orders', order, this.httpOptions).subscribe(response => response);
+  }
+
+  closeWindowDelete(){
+    this.showWindowOnDelete = false;
+    this.overflowOnDelete = 'visible';
+  }
+  showWindowDelete(){
+    this.showWindowOnDelete = true;
+    this.overflowOnDelete = 'hidden';
+  }
+  move() {
+    this.moveLine = true;
+    setTimeout(() => {
+      this.moveLine = false;
+    }, 1000);
   }
 
   setDataToStorage(arrayForOrderData: [] | any) {

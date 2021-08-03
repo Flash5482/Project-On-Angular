@@ -41,6 +41,12 @@ export class CardComponent implements OnInit {
     };
     this.setDataToStorage(this.arrayForOrderData);
 
+    this.servicePizza.moveLine = true;
+    setTimeout(() => {
+      this.servicePizza.moveLine = false;
+    }, 1000);
+
+
   }
 
   countInInput(event: any) {
