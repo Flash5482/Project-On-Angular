@@ -23,6 +23,7 @@ export class PizzaService {
 
   constructor(private http: HttpClient) {
   }
+
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
@@ -32,18 +33,29 @@ export class PizzaService {
   search() {
     return this.http.get('http://localhost:8080/products');
   }
+
   postOrder(order: any) {
     return this.http.post('http://localhost:8080/orders', order, this.httpOptions).subscribe(response => response);
   }
 
-  closeWindowDelete(){
+  getOrder() {
+    return this.http.get('http://localhost:8080/orders');
+  }
+
+  updateStatus(order: any, status: any) {
+    return this.http.put('http://localhost:8080/orders',order,status).subscribe(response => response);
+  }
+
+  closeWindowDelete() {
     this.showWindowOnDelete = false;
     this.overflowOnDelete = 'visible';
   }
-  showWindowDelete(){
+
+  showWindowDelete() {
     this.showWindowOnDelete = true;
     this.overflowOnDelete = 'hidden';
   }
+
   move() {
     this.moveLine = true;
     setTimeout(() => {

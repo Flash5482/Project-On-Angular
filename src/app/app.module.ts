@@ -32,6 +32,7 @@ import {MatOptionModule} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";
 import {MatDialogModule} from "@angular/material/dialog";
 
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 const appRoutes: Routes = [
   {path: '', component: PizzaComponent},
@@ -65,6 +66,7 @@ const appRoutes: Routes = [
   imports: [
     //KanbanModule,
     MatDialogModule,
+    DragDropModule,
     MatSelectModule,
     BrowserModule,
     RouterModule.forRoot(appRoutes),

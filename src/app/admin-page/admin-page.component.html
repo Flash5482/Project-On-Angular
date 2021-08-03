@@ -1,3 +1,91 @@
 <div class="page-wrap">
 
+  <div cdkDropListGroup>
+    <div class="example-container ">
+      <h2>To do</h2>
+      <div
+        cdkDropList id="todo"
+        [cdkDropListData]="arrayOfOrders"
+        class="example-list"
+        (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let item of arrayOfOrders" cdkDrag>
+
+          <div class="wrap-data">
+            <div class="information-block">
+              <p class="title">Address</p>
+              City:   {{item.city}}
+              Street:   {{item.street}}
+              House number:   {{item.housenumber}}
+            </div>
+            <div class="information-block">
+              <p class="title">Contact information</p>
+              Name: {{item.name}}
+              Phone: {{item.phone}}
+            </div>
+            <div class="totalPrice information-block title">
+               {{item.price}}UAH
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="example-container">
+      <h2 class="header-inProgress">In process</h2>
+      <div
+        cdkDropList id="inprogress"
+        [cdkDropListData]="arrayOfOrdersInProgress"
+        class="example-list"
+        (cdkDropListDropped)="drop($event)">
+        <div class="example-box inProgress"  *ngFor="let item of arrayOfOrdersInProgress" cdkDrag>
+          <div class="wrap-data"  >
+            <div class="information-block">
+              <p class="title-InProgress">Address</p>
+              City:   {{item.city}}
+              Street:   {{item.street}}
+              House number: {{item.housenumber}}
+            </div>
+            <div class="information-block">
+              <p class="title-InProgress">Contact information</p>
+              Name: {{item.name}}
+              Phone: {{item.phone}}
+            </div>
+            <div class="totalPrice information-block title-InProgress">
+               {{item.price}}UAH
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="example-container">
+      <h2 class="header-done">Done</h2>
+
+      <div
+        cdkDropList
+        [cdkDropListData]="arrayOfOrdersDone"
+        class="example-list"
+        id="done"
+        (cdkDropListDropped)="drop($event)">
+        <div class="example-box done" *ngFor="let item of arrayOfOrdersDone" cdkDrag>
+          <div class="wrap-data">
+            <div class="information-block">
+              <p class="title-done">Address</p>
+              City:   {{item.city}}
+              Street:   {{item.street}}
+              House number:
+            </div>
+            <div class="information-block">
+              <p class="title-done">Contact information</p>
+              Name: {{item.name}}
+              Phone: {{item.phone}}
+            </div>
+            <div class="totalPrice information-block title-done">
+              {{item.price}}UAH
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
