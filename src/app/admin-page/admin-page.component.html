@@ -11,19 +11,65 @@
         <div class="example-box" *ngFor="let item of arrayOfOrders" cdkDrag>
 
           <div class="wrap-data">
-            <div class="information-block">
-              <p class="title">Address</p>
-              City:   {{item.city}}
-              Street:   {{item.street}}
-              House number:   {{item.housenumber}}
-            </div>
-            <div class="information-block">
-              <p class="title">Contact information</p>
-              Name: {{item.name}}
-              Phone: {{item.phone}}
-            </div>
-            <div class="totalPrice information-block title">
-               {{item.price}}UAH
+            <p class="number title">#{{item.id}}</p>
+
+
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <p class="title">Address</p>
+                </mat-panel-title>
+
+              </mat-expansion-panel-header>
+              <div class="address">
+                <p> City:   {{item.city}}</p>
+                <p *ngIf="item.street !== 'def'"> Street:   {{item.street}}</p>
+                <p *ngIf="item.street !== 'def'">House number:   {{item.housenumber}}</p>
+              </div>
+
+            </mat-expansion-panel>
+
+
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <p class="title">Contact information</p>
+                </mat-panel-title>
+
+              </mat-expansion-panel-header>
+              <div>
+                <p> Name: {{item.name}}</p>
+                <p>Phone: {{item.phone}}</p>
+              </div>
+
+              <p *ngIf='item.comment!=="" ' class="title">Comment</p>
+              <p>{{item.comment}}</p>
+            </mat-expansion-panel>
+
+
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <p class="title">Product</p>
+                </mat-panel-title>
+
+              </mat-expansion-panel-header>
+              <div class="title-count">
+                <p>Title</p>
+                <p>Count</p>
+              </div>
+              <div class="product" *ngFor="let product of item.product">
+                <p>{{product.title}}</p>
+                <p> {{product.count}}</p>
+              </div>
+            </mat-expansion-panel>
+
+
+            <div class="totalPrice  ">
+              {{item.price}}UAH
             </div>
           </div>
         </div>
@@ -37,22 +83,67 @@
         [cdkDropListData]="arrayOfOrdersInProgress"
         class="example-list"
         (cdkDropListDropped)="drop($event)">
-        <div class="example-box inProgress"  *ngFor="let item of arrayOfOrdersInProgress" cdkDrag>
-          <div class="wrap-data"  >
-            <div class="information-block">
-              <p class="title-InProgress">Address</p>
-              City:   {{item.city}}
-              Street:   {{item.street}}
-              House number: {{item.housenumber}}
+        <div class="example-box inProgress" *ngFor="let item of arrayOfOrdersInProgress" cdkDrag>
+          <div class="wrap-data">
+            <p class="number title-InProgress">#{{item.id}}</p>
+
+
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <p class="title-InProgress">Address</p>
+                </mat-panel-title>
+
+              </mat-expansion-panel-header>
+              <div class="address">
+                <p> City:   {{item.city}}</p>
+                <p *ngIf="item.street !== 'def'"> Street:   {{item.street}}</p>
+                <p *ngIf="item.street !== 'def'">House number:   {{item.housenumber}}</p>
+              </div>
+
+            </mat-expansion-panel>
+
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <p class="title-InProgress">Contact information</p>
+                </mat-panel-title>
+
+              </mat-expansion-panel-header>
+              <div>
+                <p> Name: {{item.name}}</p>
+                <p>Phone: {{item.phone}}</p>
+              </div>
+
+              <p *ngIf='item.comment!=="" ' class="title-InProgress">Comment</p>
+              <p>{{item.comment}}</p>
+            </mat-expansion-panel>
+
+
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <p class="title-InProgress">Product</p>
+                </mat-panel-title>
+
+              </mat-expansion-panel-header>
+              <div class="title-count">
+                <p>Title</p>
+                <p>Count</p>
+              </div>
+              <div class="product" *ngFor="let product of item.product">
+                <p>{{product.title}}</p>
+                <p> {{product.count}}</p>
+              </div>
+            </mat-expansion-panel>
+
+            <div class="totalPrice price-inProgress title-InProgress ">
+              {{item.price}}UAH
             </div>
-            <div class="information-block">
-              <p class="title-InProgress">Contact information</p>
-              Name: {{item.name}}
-              Phone: {{item.phone}}
-            </div>
-            <div class="totalPrice information-block title-InProgress">
-               {{item.price}}UAH
-            </div>
+
           </div>
         </div>
       </div>
@@ -69,20 +160,67 @@
         (cdkDropListDropped)="drop($event)">
         <div class="example-box done" *ngFor="let item of arrayOfOrdersDone" cdkDrag>
           <div class="wrap-data">
-            <div class="information-block">
-              <p class="title-done">Address</p>
-              City:   {{item.city}}
-              Street:   {{item.street}}
-              House number:
-            </div>
-            <div class="information-block">
-              <p class="title-done">Contact information</p>
-              Name: {{item.name}}
-              Phone: {{item.phone}}
-            </div>
-            <div class="totalPrice information-block title-done">
+            <p class="number title-done">#{{item.id}}</p>
+
+
+
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <p class="title-done">Address</p>
+                </mat-panel-title>
+
+              </mat-expansion-panel-header>
+              <div class="address">
+                <p> City:   {{item.city}}</p>
+                <p *ngIf="item.street !== 'def'"> Street:   {{item.street}}</p>
+                <p *ngIf="item.street !== 'def'">House number:   {{item.housenumber}}</p>
+              </div>
+
+            </mat-expansion-panel>
+
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <p class="title-done">Contact information</p>
+                </mat-panel-title>
+
+              </mat-expansion-panel-header>
+              <div>
+                <p> Name: {{item.name}}</p>
+                <p>Phone: {{item.phone}}</p>
+              </div>
+
+              <p *ngIf='item.comment!=="" ' class="title-done">Comment</p>
+              <p>{{item.comment}}</p>
+            </mat-expansion-panel>
+
+
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <p class="title-done">Product</p>
+                </mat-panel-title>
+
+              </mat-expansion-panel-header>
+              <div class="title-count">
+                <p>Title</p>
+                <p>Count</p>
+              </div>
+              <div class="product" *ngFor="let product of item.product">
+                <p>{{product.title}}</p>
+                <p> {{product.count}}</p>
+              </div>
+            </mat-expansion-panel>
+
+            <div class="totalPrice price-done  ">
               {{item.price}}UAH
             </div>
+
+
           </div>
         </div>
       </div>

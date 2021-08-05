@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {PizzaComponent} from "../pizza.component";
 import {PizzaService} from "../../pizza-service.service";
 
@@ -24,7 +24,7 @@ export class CardComponent implements OnInit {
   public arrayForOrderData = {};
   public array: [] | any;
 
-  constructor( private servicePizza: PizzaService) {
+  constructor(public servicePizza: PizzaService) {
   }
 
   ngOnInit(): void {
@@ -42,11 +42,11 @@ export class CardComponent implements OnInit {
     this.setDataToStorage(this.arrayForOrderData);
 
     this.servicePizza.moveLine = true;
+    this.servicePizza.disabledButton = true;
     setTimeout(() => {
       this.servicePizza.moveLine = false;
+      this.servicePizza.disabledButton = false;
     }, 1000);
-
-
   }
 
   countInInput(event: any) {
@@ -64,7 +64,6 @@ export class CardComponent implements OnInit {
         if (this.countOfPizza > 200) {
           this.countOfPizza = 200;
         }
-
         break;
       }
       case '-': {

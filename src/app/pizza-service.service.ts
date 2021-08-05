@@ -19,6 +19,7 @@ export class PizzaService {
   public moveLine: boolean = false;
   showWindowOnDelete: boolean = false;
   overflowOnDelete: string = 'visible';
+  disabledButton: boolean | any;
 
 
   constructor(private http: HttpClient) {
@@ -42,8 +43,8 @@ export class PizzaService {
     return this.http.get('http://localhost:8080/orders');
   }
 
-  updateStatus(order: any, status: any) {
-    return this.http.put('http://localhost:8080/orders',order,status).subscribe(response => response);
+  updateStatus(order: any) {
+    return this.http.put('http://localhost:8080/orders',order,this.httpOptions).subscribe(response => response);
   }
 
   closeWindowDelete() {

@@ -21,7 +21,7 @@
       </div>
     </div>
     <div class="pizza__pay-button">
-      <button (click)="setOrder(pizzaItem.price,countOfPizza,pizzaItem.title,pizzaItem.img)">Add to basket</button>
+      <button [disabled]="this.servicePizza.disabledButton"  (click)="setOrder(pizzaItem.price,countOfPizza,pizzaItem.title,pizzaItem.img)">Add to basket</button>
     </div>
   </div>
 

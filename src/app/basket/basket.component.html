@@ -91,7 +91,7 @@
       </mat-form-field>
 
 
-      <div *ngIf="delivery" class="block-address" formGroupName="address">
+      <div class="block-address" formGroupName="address">
 
 
 
@@ -106,7 +106,7 @@
         </mat-form-field>
 
 
-        <mat-form-field class="example-full-width" appearance="outline">
+        <mat-form-field *ngIf="delivery" class="example-full-width" appearance="outline">
           <mat-label>Street</mat-label>
           <input type="text" matInput formControlName="street" placeholder="st. Baker" maxlength="45">
           <mat-error *ngIf="street.hasError('required')">
@@ -115,7 +115,7 @@
         </mat-form-field>
 
 
-        <mat-form-field class="example-full-width" appearance="outline">
+        <mat-form-field  *ngIf="delivery" class="example-full-width" appearance="outline">
           <mat-label>House number</mat-label>
           <input class="houseNumber" type="text" matInput formControlName="houseNumber" placeholder="18D" maxlength="4">
           <mat-error *ngIf="houseNumber.hasError('required')">
@@ -124,7 +124,7 @@
         </mat-form-field>
       </div>
 
-      <div *ngIf="ifExitOrder " class="button-make-order">
+      <div class="button-make-order">
         <div class="button-wrapper " [ngClass]="{buttonHover: orderForm.valid }">
           <button class="button" [ngClass]="{button2: orderForm.valid}" type="submit" [disabled]="!orderForm.valid">Make
             an order
