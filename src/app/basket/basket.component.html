@@ -1,15 +1,5 @@
 
 
-<div (click)="service.closeWindowDelete()" [ngClass]="{'background-On-Delete' : service.showWindowOnDelete }"></div>
-<div class="window-on-delete" [ngClass]="{'window-on-delete':service.showWindowOnDelete}">
-  <div class="title">Are you sure?</div>
-  <div class="button">
-    <button class="button-yes" (click)="deleteProductFromOrder()">Yes</button>
-    <button class="button-no" (click)="service.closeWindowDelete()">No</button>
-  </div>
-</div>
-
-
 <div class="content" >
   <p class="title-basket">basket</p>
   <div class="wrap-content">
@@ -23,7 +13,7 @@
       </div>
     </div>
     <div class="wrap-content__body">
-      <app-card-basket [title]="title" (getTitle)="deleteProductFromBasket($event)"
+      <app-card-basket [title]="title" (getTitle)="deleteProductFromBasket($event)" [deleteProduct] = "deleteProductFromOrder"
                        [changeCounts]="changeCounts"
                        [totalPrice]="this.totalPrice"
                        *ngFor="let order of orderArray" [orderArray]="orderArray" [order]="order"></app-card-basket>
@@ -123,8 +113,8 @@
           </mat-error>
         </mat-form-field>
       </div>
-
       <div class="button-make-order">
+
         <div class="button-wrapper " [ngClass]="{buttonHover: orderForm.valid }">
           <button class="button" [ngClass]="{button2: orderForm.valid}" type="submit" [disabled]="!orderForm.valid">Make
             an order

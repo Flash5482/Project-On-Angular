@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {PizzaService} from "../pizza-service.service";
+import {MatDialog} from "@angular/material/dialog";
+import {DialogOnCreateOrderComponent} from "../dialogWindow/dialog-on-createOrder/dialog-on-createOrder.component";
+
 
 @Component({
     selector: 'app-basket',
@@ -26,7 +29,7 @@ export class BasketComponent implements OnInit {
         "Kiev"
     ];
 
-    constructor(public service: PizzaService) {
+    constructor(public service: PizzaService, public dialog: MatDialog) {
         this.orderArray = sessionStorage.getItem("orderData");
         this.orderArray = JSON.parse(this.orderArray);
 
@@ -99,7 +102,9 @@ export class BasketComponent implements OnInit {
             this.totalPrice);
         console.log(this.objectOrder);
         this.service.postOrder(this.objectOrder);
-      sessionStorage.clear();
+      //sessionStorage.clear();
+      this.dialog.open(DialogOnCreateOrderComponent);
+      setTimeout(()=>{this.dialog.closeAll()},2000)
 
     }
 
@@ -185,8 +190,7 @@ export class BasketComponent implements OnInit {
         this.title = element;
     };
 
-    deleteProductFromOrder() {
-
+    deleteProductFromOrder = ()=> {
         if (this.orderArray.length === 1) {
             this.service.showCircle = false;
             this.ifExitOrder = false;
@@ -194,7 +198,6 @@ export class BasketComponent implements OnInit {
 
         this.orderArray = this.orderArray.filter((item: any) => item.title !== this.title);
         sessionStorage.setItem("orderData", JSON.stringify(this.orderArray));
-
 
         this.totalPrice = this.orderArray.reduce((current: number, nex: any) => current + nex.price * nex.count, 0);
         this.service.showWindowOnDelete = false;

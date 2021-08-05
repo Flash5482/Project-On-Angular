@@ -33,6 +33,8 @@ import {MatDialogModule} from "@angular/material/dialog";
 
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MatExpansionModule} from "@angular/material/expansion";
+import {DialogOnCreateOrderComponent} from "./dialogWindow/dialog-on-createOrder/dialog-on-createOrder.component";
+import { WindowOnDeleteProductComponent } from './dialogWindow/window-on-delete-product/window-on-delete-product.component';
 
 const appRoutes: Routes = [
   {path: '', component: PizzaComponent},
@@ -63,6 +65,8 @@ const appRoutes: Routes = [
     CardBasketComponent,
     AdminPageComponent,
     SlideLineComponent,
+    DialogOnCreateOrderComponent,
+    WindowOnDeleteProductComponent,
   ],
   imports: [
     MatExpansionModule,
