@@ -11,19 +11,18 @@ export class PizzaComponent implements OnInit {
   setDataToStorage: any;
 
 
-
-
   constructor(public pizzaServ: PizzaService) {
     this.setDataToStorage = this.pizzaServ.setDataToStorage;
-    this.pizzaServ.search().subscribe(response => {
-      this.pizzaArray = response;
-      this.pizzaArray = this.pizzaArray.filter((item: any) => item.type === "pizza");
-    });
+
+    this.pizzaArray = pizzaServ.setProductsToSessionStorage('pizza');
 
 
   }
 
   ngOnInit(): void {
   }
+
+
+
 
 }

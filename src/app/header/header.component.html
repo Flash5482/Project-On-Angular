@@ -6,8 +6,38 @@
     </div>
     <p>andy'z pizza </p>
   </div>
+
+  <a *ngIf="this.service.isAdmin"  routerLink="/delivery">
+    <div  class="nav">
+      <div (click)="closeMenu()"  class="nav__item" [ngClass]="{active:showMenu}">
+        <div class="nav__item-img">
+          <img src="./assets/img/scooter.svg" alt="">
+        </div>
+        <div class="nav__item-title">
+          <p>Delivery</p>
+        </div>
+      </div>
+    </div>
+  </a>
+
   <app-nav *ngFor="let iterItem of navItems" [closeMenu]="closeMenu" [navItem]="iterItem"
            [showNav]="showMenu"></app-nav>
+
+  <a (click)="logout()"  routerLink="/login">
+    <div  class="nav">
+      <div (click)="closeMenu()"  class="nav__item" [ngClass]="{active:showMenu}">
+        <div class="nav__item-img">
+          <img src="./assets/img/enter.svg" alt="">
+        </div>
+        <div class="nav__item-title">
+          <p *ngIf="!service.statusLogin">login</p>
+          <p *ngIf="service.statusLogin">logout</p>
+
+        </div>
+      </div>
+    </div>
+  </a>
+
   <div *ngIf="this.service.showCircle" class="redCircle"></div>
 
 </div>

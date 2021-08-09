@@ -12,10 +12,9 @@ export class DrinksComponent implements OnInit {
   setDataToStorage: any;
   constructor(public pizzaServ: PizzaService) {
     this.setDataToStorage = this.pizzaServ.setDataToStorage;
-    this.pizzaServ.search().subscribe(response => {
-      this.drinksArray = response;
-      this.drinksArray = this.drinksArray.filter((item: any) => item.type === "drinks");
-    });
+
+    this.drinksArray = pizzaServ.setProductsToSessionStorage('drinks');
+
   }
   ngOnInit(): void {
   }

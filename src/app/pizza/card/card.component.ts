@@ -23,6 +23,7 @@ export class CardComponent implements OnInit {
   countOfPizza: number = 1;
   public arrayForOrderData = {};
   public array: [] | any;
+  isDataLoaded: boolean = false;
 
   constructor(public servicePizza: PizzaService) {
   }

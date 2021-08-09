@@ -16,8 +16,8 @@ export class CardBasketComponent implements OnInit {
   @Input() totalPrice: BasketComponent | any;
   @Input() title: BasketComponent | any;
   @Output() getTitle = new EventEmitter();
-
   @Input() deleteProduct: BasketComponent | any;
+
 
   constructor(public service: PizzaService, public dialog: MatDialog) {
   }

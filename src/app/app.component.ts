@@ -8,9 +8,17 @@ import {PizzaService} from "./pizza-service.service";
 })
 export class AppComponent {
   constructor(public service: PizzaService) {
+
+
+
+    service.search().subscribe(response => {
+       let pizzaArray = response;
+        sessionStorage.setItem('products', JSON.stringify(pizzaArray));
+        service.isDataLoaded= true;
+      });
+
   }
-  ngOnInit(): void {
-  }
+
 
 
   title = 'Project-On-Angular';

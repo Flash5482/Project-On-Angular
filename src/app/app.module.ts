@@ -35,6 +35,9 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MatExpansionModule} from "@angular/material/expansion";
 import {DialogOnCreateOrderComponent} from "./dialogWindow/dialog-on-createOrder/dialog-on-createOrder.component";
 import { WindowOnDeleteProductComponent } from './dialogWindow/window-on-delete-product/window-on-delete-product.component';
+import {ProgressBarOnDeleteComponent} from "./progressBar/progress-bar-on-delete/progress-bar-on-delete.component";
+import { LoginComponent } from './login/login.component';
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 const appRoutes: Routes = [
   {path: '', component: PizzaComponent},
@@ -43,10 +46,9 @@ const appRoutes: Routes = [
   {path: 'drinks', component: DrinksComponent},
   {path: 'dessert', component: DessertComponent},
   {path: 'basket', component: BasketComponent},
-  {path: 'admin', component: AdminPageComponent},
+  {path: 'delivery', component: AdminPageComponent},
+  {path: 'login', component: LoginComponent},
   {path: '**', component: NotFoundComponent}
-
-
 ]
 
 @NgModule({
@@ -67,15 +69,19 @@ const appRoutes: Routes = [
     SlideLineComponent,
     DialogOnCreateOrderComponent,
     WindowOnDeleteProductComponent,
+    ProgressBarOnDeleteComponent,
+    LoginComponent,
+
   ],
   imports: [
+    MatProgressSpinnerModule,
+    MatIconModule,
     MatExpansionModule,
     MatDialogModule,
     DragDropModule,
     MatSelectModule,
     BrowserModule,
     RouterModule.forRoot(appRoutes),
-    MatIconModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
@@ -85,7 +91,7 @@ const appRoutes: Routes = [
     MatButtonModule,
     MatInputModule,
     BrowserAnimationsModule,
-    MatOptionModule
+    MatOptionModule,
 
 
   ],

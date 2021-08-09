@@ -12,11 +12,11 @@ export class AdminPageComponent implements OnInit {
   arrayOfOrdersInProgress: [] | any;
   arrayOfOrdersDone: [] | any;
   showBlock: boolean = false;
-  showItem: boolean = true;
+  showItem: boolean = false;
   products: any;
   allOrders: any;
-
   panelOpenState = false;
+
 
   constructor(public service: PizzaService) {
     service.getOrder().subscribe(response => {
@@ -24,14 +24,13 @@ export class AdminPageComponent implements OnInit {
 
       this.arrayOfOrders = this.allOrders.filter((item: any) => {
         item.product = JSON.parse(item.product);
-        console.log(item.product);
-
         return item.status === "todo"
       });
       this.arrayOfOrdersInProgress = this.allOrders.filter((item: any) => item.status === "inprogress");
       this.arrayOfOrdersDone = this.allOrders.filter((item: any) => item.status === "done");
-
+      this.showItem = true;
     });
+
   }
 
   ngOnInit(): void {
@@ -41,8 +40,8 @@ export class AdminPageComponent implements OnInit {
 
   drop(event: CdkDragDrop<string[] | any>) {
     console.log(event.previousContainer.data[event.previousIndex]);
-
     console.log(event.previousContainer.data[event.previousIndex].id, event.container.id);
+
     let object = {
       id: event.previousContainer.data[event.previousIndex].id,
       status: event.container.id

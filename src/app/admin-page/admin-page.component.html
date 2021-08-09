@@ -1,6 +1,10 @@
-<div class="page-wrap">
+<div  class="page-wrap">
+  <div    class="spinner">
+    <mat-spinner *ngIf="!showItem" ></mat-spinner>
 
-  <div cdkDropListGroup>
+  </div>
+
+  <div *ngIf="showItem" cdkDropListGroup>
     <div class="example-container ">
       <h2>To do</h2>
       <div

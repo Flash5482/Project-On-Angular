@@ -1,0 +1,129 @@
+<div class="wrap">
+  <div class="container">
+
+    <form *ngIf="!showDorm" class="login-form" [formGroup]="loginForm" (ngSubmit)='onSubmit()'>
+      <p>Login</p>
+
+      <mat-form-field class="example-full-width logins" appearance="outline">
+        <mat-label>Telephone</mat-label>
+        <span matPrefix>+38 &nbsp;</span>
+        <input
+          onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"
+          type="tel" formControlName="login" minlength="10" maxlength="10" matInput placeholder="067-555-1234">
+        <mat-error *ngIf="login.hasError('required')">
+          Login is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+
+      <mat-form-field appearance="outline">
+        <mat-label>Enter your password</mat-label>
+        <input formControlName="password"  matInput [type]="hide ? 'password' : 'text'" maxlength="70">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? '' : ''}}</mat-icon>
+        </button>
+        <mat-error *ngIf="password.hasError('required')">
+          Password is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+
+      <button *ngIf="!showDorm" class="button-login" type="submit" [ngClass]="{button2: loginForm.valid}" [disabled]="!loginForm.valid">
+        Login
+      </button>
+
+      <div class="signup">
+        <span>Not a member?</span>
+        <div (click)="showDorm = true" class="signup-click">Signup now</div>
+      </div>
+
+    </form>
+
+
+    <form *ngIf="showDorm" class="login-form" [formGroup]="signupForm" (ngSubmit)='onSubmitSignup()'>
+      <p>Signup</p>
+
+      <mat-form-field class="example-full-width logins" appearance="outline">
+        <mat-label>Telephone</mat-label>
+        <span matPrefix>+38 &nbsp;</span>
+        <input
+          onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"
+          type="tel" formControlName="phone" minlength="10" maxlength="10" matInput placeholder="067-555-1234">
+        <mat-error *ngIf="phone.hasError('required')">
+          Login is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width logins" appearance="outline">
+        <mat-label>Name</mat-label>
+        <input
+          type="text" formControlName="name" maxlength="50" matInput placeholder="Jhon">
+        <mat-error *ngIf="phone.hasError('required')">
+          Name is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <div class="block-address" formGroupName="address">
+
+
+        <mat-form-field appearance="outline">
+          <mat-label>City</mat-label>
+          <mat-select formControlName="city">
+            <mat-option *ngFor="let city of arrayOfCity" [value]="city">
+              {{city}}
+            </mat-option>
+
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width logins" appearance="outline">
+          <mat-label>Street</mat-label>
+          <input
+            type="text" formControlName="street" maxlength="50" matInput placeholder="Jhon">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width logins" appearance="outline">
+          <mat-label>HouseNumber</mat-label>
+          <input
+            type="text" formControlName="houseNumber" maxlength="50" matInput placeholder="Jhon">
+        </mat-form-field>
+      </div>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Enter your password</mat-label>
+        <input formControlName="passwordSignup" matInput [type]="hide ? 'password' : 'text'" maxlength="70">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? '' : ''}}</mat-icon>
+        </button>
+        <mat-error *ngIf="passwordSignup.hasError('required')">
+          Password is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Enter your password</mat-label>
+        <input formControlName="secondPassword" matInput [type]="hide ? 'password' : 'text'" maxlength="70">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? '' : ''}}</mat-icon>
+        </button>
+        <mat-error *ngIf="secondPassword.hasError('required')">
+          Password is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <button *ngIf="showDorm" class="button-login" type="submit"  [ngClass]="{button2: signupForm.valid}" [disabled]="!signupForm.valid">
+        <span>Sign-up</span>
+      </button>
+
+      <div class="signup">
+        <span>Already have an account? </span>
+        <div (click)="showDorm = false" class="signup-click">Login</div>
+      </div>
+
+    </form>
+
+  </div>
+</div>

@@ -18,11 +18,12 @@ export class HeaderComponent implements OnInit {
 
   showMenu: boolean = false;
   orderArray: any;
-
   showCircle: boolean | any;
+  isAdmin: boolean | any;
+  statusLogin: boolean | any;
+
 
   constructor(public service: PizzaService) {
-
 
   }
 
@@ -33,6 +34,13 @@ export class HeaderComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+    this.isAdmin = localStorage.getItem('isAdmin')
+    this.service.isAdmin = JSON.parse(this.isAdmin);
+
+    this.statusLogin = sessionStorage.getItem('statusLogin')
+    this.service.statusLogin = JSON.parse(this.statusLogin);
+
     this.orderArray = sessionStorage.getItem("orderData");
     this.orderArray = JSON.parse(this.orderArray);
 
@@ -41,8 +49,14 @@ export class HeaderComponent implements OnInit {
     } else  {
       this.service.showCircle = false;
     }
-
-
+  }
+  logout(){
+    if(this.service.statusLogin){
+      this.service.statusLogin = false;
+      sessionStorage.setItem('statusLogin','false');
+      this.service.isAdmin = false;
+      localStorage.clear();
+    }
   }
 
 
