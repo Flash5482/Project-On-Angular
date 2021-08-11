@@ -1,0 +1,12 @@
+
+<div class="wrap-dessert">
+  <h1 class="dessert__title">Dessert</h1>
+  <div class="content">
+    <div fxLayout="row wrap" fxLayoutGap="0 grid">
+      <app-card fxFlex.gt-sm="33%" fxFlex.gt-xs="50%" *ngFor="let desertArray of desertArray"
+                [pizzaItem]="desertArray" [setDataToStorage]="setDataToStorage" ></app-card>
+    </div>
+  </div>
+
+</div>
+

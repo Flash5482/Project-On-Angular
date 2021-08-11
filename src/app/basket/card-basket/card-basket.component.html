@@ -1,0 +1,36 @@
+
+<div class="order-card">
+  <div class="wrap-product">
+    <div class="information-product">
+      <div class="image">
+        <img src="{{order.img}}" alt="">
+      </div>
+      <div class="information-product-info">
+
+        <div (click)="deleteProductFromOrder(order.title)" class="delete-product">
+          <div class="delete-product__button">
+            <span></span>
+          </div>
+        </div>
+
+        <div class="title">
+          <p>{{order.title}}</p>
+        </div>
+        <div class="information-product-info__wrap">
+          <div class="price-product__price"><p>{{order.price}} UAH</p></div>
+          <div class="pizza__pay-count">
+            <div (click)="changeCounts('-',order.title)" class="pizza__pay-count__minus"><span></span></div>
+            <input (input)="changeCounts($event,order.title)" min="1" maxlength="3" [value]="order.count" name="" id=""
+                   cols="2"
+                   rows="1">
+            <div (click)="changeCounts('+',order.title)" class="pizza__pay-count__plus"><span></span>
+            </div>
+          </div>
+          <div class="price-product__total">{{order.price * order.count}}</div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>

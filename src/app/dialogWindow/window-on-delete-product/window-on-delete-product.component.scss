@@ -1,0 +1,42 @@
+.title {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 22pt;
+  margin-top: 15px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 60px;
+
+  button {
+    transition: 300ms;
+
+    width: 200px;
+    height: 40px;
+    color: white;
+    font-size: 15pt;
+    &:nth-child(1) {
+      background: brown;
+      &:hover{
+        background: white;
+        box-shadow: 0 0 10px brown;
+        color: brown;
+      }
+    }
+    &:nth-child(2) {
+      &:hover{
+        background: white;
+        box-shadow: 0 0 10px green;
+        color: green;
+      }
+      background: rgba(0, 128, 0, 0.3);
+    }
+  }
+
+}
+

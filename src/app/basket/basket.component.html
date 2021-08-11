@@ -1,0 +1,135 @@
+<!--
+<app-progress-bar-on-delete class="moveBox2"></app-progress-bar-on-delete>
+-->
+
+<div class="content">
+
+  <p class="title-basket">basket</p>
+  <div class="wrap-content">
+    <div class="wrap-content__title">
+
+      <div class="title-product"><p>Product</p></div>
+      <div class="title_money">
+        <div class="title-price">Price</div>
+        <div class="title-amount">Count</div>
+        <div class="title-total">Total</div>
+      </div>
+    </div>
+    <div class="wrap-content__body">
+      <app-card-basket [title]="title" (getTitle)="deleteProductFromBasket($event)"
+                       [deleteProduct]="deleteProductFromOrder"
+                       [changeCounts]="changeCounts"
+                       [totalPrice]="this.totalPrice"
+                       *ngFor="let order of orderArray" [orderArray]="orderArray" [order]="order"></app-card-basket>
+    </div>
+    <div class="total">
+      <div class="total__item" *ngIf="ifExitOrder; else unset ">Total:
+        <div class="found-order">{{totalPrice}}</div>
+      </div>
+      <ng-template #unset><p class="not-found-order">The cart is empty.</p></ng-template>
+    </div>
+  </div>
+
+  <div *ngIf="ifExitOrder " class="choose-method">
+    <p class="choose-method__title">Choose the delivery method</p>
+    <div class="wrap__item">
+      <div (click)="setDelivery()" class="choose-method__item">
+        <div class="circle">
+          <div *ngIf="delivery" class="circle__fill"></div>
+        </div>
+        <p>Delivery</p>
+      </div>
+      <div (click)="setPickup()" class="choose-method__item">
+        <div class="circle">
+          <div *ngIf="pickup" class="circle__fill"></div>
+        </div>
+        <p>Pickup</p>
+      </div>
+    </div>
+  </div>
+
+
+  <div *ngIf="ifExitOrder " class="create-order">
+    <form [formGroup]="orderForm" class="wrap-form" (ngSubmit)='onSubmit()'>
+
+      <!--   onkeypress="return (event.charCode >=65  && event.charCode <=90 || (event.charCode >= 95 && event.charCode <= 122) ||
+         (event.charCode >=1000 && event.charCode <= 1100) )"-->
+
+      <mat-form-field class="example-full-width" appearance="outline" [ngStyle]="{borderRadius: '50px'}">
+        <mat-label>Name</mat-label>
+        <input type="text" matInput formControlName="name" placeholder="Ex. Andrew" maxlength="45">
+        <mat-error *ngIf="name.hasError('required')">
+          Name is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Telephone</mat-label>
+        <span matPrefix>+38 &nbsp;</span>
+        <input
+          onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"
+          type="tel" formControlName="phoneNumber" maxlength="10" matInput placeholder="067-555-1234">
+        <mat-icon matSuffix></mat-icon>
+        <mat-error *ngIf="phoneNumber.hasError('minlength')">
+          Phone must have 10 numbers
+        </mat-error>
+        <mat-error *ngIf="phoneNumber.hasError('required')">
+          Phone is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Leave a comment</mat-label>
+        <textarea maxlength="250" matInput placeholder="Ex. It makes me feel..." formControlName="comment"></textarea>
+      </mat-form-field>
+
+
+      <div class="block-address" formGroupName="address">
+
+
+        <mat-form-field appearance="outline">
+          <mat-label>City</mat-label>
+          <mat-select  formControlName="city">
+            <mat-option *ngFor="let city of arrayOfCity" [value]="city">
+              {{city}}
+            </mat-option>
+
+          </mat-select>
+        </mat-form-field>
+
+
+        <mat-form-field *ngIf="delivery" class="example-full-width" appearance="outline">
+          <mat-label>Street</mat-label>
+          <input  type="text" matInput formControlName="street" placeholder="st. Baker" maxlength="45">
+          <mat-error *ngIf="street.hasError('required')">
+            Street is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field *ngIf="delivery" class="example-full-width" appearance="outline">
+          <mat-label>House number</mat-label>
+          <input class="houseNumber" type="text" matInput formControlName="houseNumber" placeholder="18D" maxlength="4">
+          <mat-error *ngIf="houseNumber.hasError('required')">
+            House number is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="button-make-order">
+
+        <div class="button-wrapper " [ngClass]="{buttonHover: orderForm.valid }">
+          <button class="button" [ngClass]="{button2: orderForm.valid}" type="submit" [disabled]="!orderForm.valid">Make
+            an order
+          </button>
+        </div>
+      </div>
+
+    </form>
+
+  </div>
+
+
+</div>
+
+

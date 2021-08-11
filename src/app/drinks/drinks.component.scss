@@ -1,0 +1,21 @@
+.wrap-drinks {
+  max-width: 1400px;
+  margin: 150px auto 0 auto;
+
+  .drinks__title {
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 35pt;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 5px;
+  }
+
+  .content {
+    padding: 16px;
+  }
+}
+
+
