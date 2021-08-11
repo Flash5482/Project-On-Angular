@@ -90,7 +90,7 @@
 
         <mat-form-field appearance="outline">
           <mat-label>City</mat-label>
-          <mat-select formControlName="city">
+          <mat-select  formControlName="city">
             <mat-option *ngFor="let city of arrayOfCity" [value]="city">
               {{city}}
             </mat-option>
@@ -101,7 +101,7 @@
 
         <mat-form-field *ngIf="delivery" class="example-full-width" appearance="outline">
           <mat-label>Street</mat-label>
-          <input type="text" matInput formControlName="street" placeholder="st. Baker" maxlength="45">
+          <input  type="text" matInput formControlName="street" placeholder="st. Baker" maxlength="45">
           <mat-error *ngIf="street.hasError('required')">
             Street is <strong>required</strong>
           </mat-error>

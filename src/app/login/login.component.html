@@ -13,6 +13,9 @@
         <mat-error *ngIf="login.hasError('required')">
           Login is <strong>required</strong>
         </mat-error>
+        <mat-error *ngIf="login.hasError('validateOnCorrectPasswordLogin')">
+          Login is <strong>Incorrect</strong>
+        </mat-error>
       </mat-form-field>
 
 
@@ -28,10 +31,13 @@
         </mat-error>
       </mat-form-field>
 
-
+      <div  *ngIf="service.showError" class="error">
+        <span>Your password or phone are incorrect</span>
+      </div>
       <button *ngIf="!showDorm" class="button-login" type="submit" [ngClass]="{button2: loginForm.valid}" [disabled]="!loginForm.valid">
         Login
       </button>
+
 
       <div class="signup">
         <span>Not a member?</span>

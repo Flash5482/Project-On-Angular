@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {PizzaService} from "../pizza-service.service";
 import {Router} from "@angular/router";
+import {MatDialog} from "@angular/material/dialog";
+import {DialogOnCreateOrderComponent} from "../dialogWindow/dialog-on-createOrder/dialog-on-createOrder.component";
 
 @Component({
   selector: 'app-login',
@@ -21,11 +23,13 @@ export class LoginComponent implements OnInit {
     "Kiev"
   ];
 
-  constructor(public service: PizzaService, private router:Router) {
+  constructor(public service: PizzaService, public dialog: MatDialog, private router: Router) {
   }
 
 
   ngOnInit(): void {
+
+
     this.loginForm = new FormGroup({
       login: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required])
@@ -44,14 +48,20 @@ export class LoginComponent implements OnInit {
       secondPassword: new FormControl('', [Validators.required])
 
     });
+
+
   }
+
+
 
   get login() {
     return this.loginForm.get('login');
+
   }
 
   get password() {
     return this.loginForm.get('password');
+
   }
 
   get name() {
@@ -98,6 +108,13 @@ export class LoginComponent implements OnInit {
       this.signupForm.get('address').get('houseNumber').value
     );
     this.service.addUser(user);
+
+    this.dialog.open(DialogOnCreateOrderComponent, {width: '450px'});
+    setTimeout(() => {
+      this.showDorm=false;
+      this.dialog.closeAll();
+
+    }, 2000)
   }
 
 

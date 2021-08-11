@@ -1,5 +1,8 @@
-import {Component, DoCheck, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PizzaService} from "../pizza-service.service";
+import {MatDialog} from "@angular/material/dialog";
+import {WindowOnLogOutComponent} from "../dialogWindow/window-on-log-out/window-on-log-out.component";
+import {Router} from "@angular/router";
 
 export interface navItem {
   title: string,
@@ -23,14 +26,13 @@ export class HeaderComponent implements OnInit {
   statusLogin: boolean | any;
 
 
-  constructor(public service: PizzaService) {
+  constructor(public service: PizzaService, private route: Router, public dialog: MatDialog,) {
 
   }
 
   public closeMenu = () => {
     this.showMenu = false;
   };
-
 
 
   ngOnInit(): void {
@@ -46,16 +48,16 @@ export class HeaderComponent implements OnInit {
 
     if (this.orderArray.length > 0) {
       this.service.showCircle = true;
-    } else  {
+    } else {
       this.service.showCircle = false;
     }
   }
-  logout(){
-    if(this.service.statusLogin){
-      this.service.statusLogin = false;
-      sessionStorage.setItem('statusLogin','false');
-      this.service.isAdmin = false;
-      localStorage.clear();
+
+  logout() {
+    if (this.service.statusLogin) {
+      this.dialog.open(WindowOnLogOutComponent, {width: '500px'});
+    } else {
+      this.route.navigate(['login']);
     }
   }
 
@@ -87,7 +89,6 @@ export class HeaderComponent implements OnInit {
   public moveMenu() {
     this.showMenu = !this.showMenu;
   }
-
 
 
 }

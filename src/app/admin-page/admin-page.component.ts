@@ -28,7 +28,10 @@ export class AdminPageComponent implements OnInit {
       });
       this.arrayOfOrdersInProgress = this.allOrders.filter((item: any) => item.status === "inprogress");
       this.arrayOfOrdersDone = this.allOrders.filter((item: any) => item.status === "done");
+
       this.showItem = true;
+
+
     });
 
   }

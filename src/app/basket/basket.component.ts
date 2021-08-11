@@ -26,6 +26,14 @@ export class BasketComponent implements OnInit {
     "Lviv",
     "Kiev"
   ];
+  userPhone: any;
+  user: any;
+
+  userName: any;
+  userCity: any;
+  userStreet: any;
+  userHouseNumber: any;
+
 
   constructor(public service: PizzaService, public dialog: MatDialog, private router: Router) {
     this.orderArray = sessionStorage.getItem("orderData");
@@ -39,6 +47,27 @@ export class BasketComponent implements OnInit {
         this.ifExitOrder = false;
       } else this.ifExitOrder = true;
     }
+
+    let id = localStorage.getItem('userId');
+
+    console.log(id);
+
+    let user = service.getUser(id).subscribe(response => {
+        this.user = JSON.stringify(response);
+        console.log(this.userPhone);
+        this.orderForm.patchValue({
+          phoneNumber: JSON.parse(this.user).phoneNumber,
+          name: JSON.parse(this.user).name,
+          address: {
+            city: JSON.parse(this.user).city,
+            street: JSON.parse(this.user).street,
+            houseNumber: JSON.parse(this.user).house
+          }
+        });
+      }
+    )
+
+
   }
 
 
@@ -106,12 +135,6 @@ export class BasketComponent implements OnInit {
     this.dialog.open(DialogOnCreateOrderComponent, {width: '450px'});
     setTimeout(() => {
       this.dialog.closeAll();
-
-      this.service.search().subscribe(response => {
-        let pizzaArray = response;
-        sessionStorage.setItem('products', JSON.stringify(pizzaArray));
-        this.service.isDataLoaded= true;
-      });
       this.router.navigate(['pizza']);
     }, 2000)
 

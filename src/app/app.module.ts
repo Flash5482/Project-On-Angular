@@ -38,6 +38,7 @@ import { WindowOnDeleteProductComponent } from './dialogWindow/window-on-delete-
 import {ProgressBarOnDeleteComponent} from "./progressBar/progress-bar-on-delete/progress-bar-on-delete.component";
 import { LoginComponent } from './login/login.component';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import { WindowOnLogOutComponent } from './dialogWindow/window-on-log-out/window-on-log-out.component';
 
 const appRoutes: Routes = [
   {path: '', component: PizzaComponent},
@@ -71,6 +72,7 @@ const appRoutes: Routes = [
     WindowOnDeleteProductComponent,
     ProgressBarOnDeleteComponent,
     LoginComponent,
+    WindowOnLogOutComponent,
 
   ],
   imports: [

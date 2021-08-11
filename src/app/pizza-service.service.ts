@@ -26,7 +26,8 @@ export class PizzaService implements OnInit {
   isAdmin: boolean = false;
   httpOptions: any;
   isDataLoaded: boolean = false;
-
+  showError: boolean = false;
+  userId: any;
 
   constructor(private http: HttpClient, private router: Router) {
 
@@ -70,7 +71,7 @@ export class PizzaService implements OnInit {
   }
 
   postOrder(order: any) {
-    return this.http.post('http://localhost:8080/orders', order, this.httpOptions).subscribe(response => response);
+    return this.http.post('http://localhost:8080/orders', order).subscribe(response => response);
   }
 
 
@@ -101,30 +102,52 @@ export class PizzaService implements OnInit {
   statusLogin: any = false;
 
   login(credential: any) {
-    return this.http.post('http://localhost:8080/login', credential, this.httpOptions).subscribe(response => {
-        console.log(response);
+    console.log("First cred", this.httpOptions);
+
+    return this.http.post('http://localhost:8080/login', credential).subscribe(response => {
+        console.log('Password ', response);
         this.isAdmin = JSON.parse(JSON.stringify(response)).isAdmin;
+        this.userId = JSON.parse(JSON.stringify(response)).userId;
+        localStorage.setItem('userId', JSON.parse(JSON.stringify(response)).userId);
         localStorage.setItem('isAdmin', JSON.parse(JSON.stringify(response)).isAdmin);
         localStorage.setItem('apiKey', JSON.parse(JSON.stringify(response)).token);
         if (this.isAdmin) {
           this.router.navigate(['delivery']);
         } else {
+
           this.router.navigate(['pizza']);
         }
         this.statusLogin = true;
-        sessionStorage.setItem('statusLogin',this.statusLogin);
+        sessionStorage.setItem('statusLogin', this.statusLogin);
+        this.showError = false;
+
+        console.log("Last cred", credential);
 
         return this.apiToken = response;
       }, catchError => {
-        console.log(
-          "No"
-        );
+        this.showError = true;
       }
     )
   }
 
   addUser(user: any) {
     return this.http.post('http://localhost:8080/users', user, this.httpOptions).subscribe(response => response);
+  }
+
+  getUser(userId: any) {
+    this.apiKey = localStorage.getItem('apiKey');
+
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': this.apiKey
+
+      })
+    };
+    console.log('http://localhost:8080/users/' + userId)
+    return this.http.get('http://localhost:8080/users/' + userId, this.httpOptions);
+
   }
 
   closeWindowDelete() {

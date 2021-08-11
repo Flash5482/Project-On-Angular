@@ -23,8 +23,8 @@
   <app-nav *ngFor="let iterItem of navItems" [closeMenu]="closeMenu" [navItem]="iterItem"
            [showNav]="showMenu"></app-nav>
 
-  <a (click)="logout()"  routerLink="/login">
-    <div  class="nav">
+  <!--<a (click)="logout()"  routerLink="/login">-->
+    <div  (click)="logout()"  class="nav">
       <div (click)="closeMenu()"  class="nav__item" [ngClass]="{active:showMenu}">
         <div class="nav__item-img">
           <img src="./assets/img/enter.svg" alt="">
@@ -36,7 +36,7 @@
         </div>
       </div>
     </div>
-  </a>
+<!--  </a>-->
 
   <div *ngIf="this.service.showCircle" class="redCircle"></div>
 
