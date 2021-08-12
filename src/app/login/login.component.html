@@ -108,17 +108,7 @@
         </mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
-        <mat-label>Enter your password</mat-label>
-        <input formControlName="secondPassword" matInput [type]="hide ? 'password' : 'text'" maxlength="70">
-        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-                [attr.aria-pressed]="hide">
-          <mat-icon>{{hide ? '' : ''}}</mat-icon>
-        </button>
-        <mat-error *ngIf="secondPassword.hasError('required')">
-          Password is <strong>required</strong>
-        </mat-error>
-      </mat-form-field>
+
 
       <button *ngIf="showDorm" class="button-login" type="submit"  [ngClass]="{button2: signupForm.valid}" [disabled]="!signupForm.valid">
         <span>Sign-up</span>
