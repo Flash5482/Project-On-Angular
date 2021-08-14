@@ -12,7 +12,6 @@ export class SaladComponent implements OnInit {
   setDataToStorage: any;
   constructor(public pizzaServ: PizzaService) {
     this.setDataToStorage = this.pizzaServ.setDataToStorage;
-
     this.saladArray = pizzaServ.setProductsToSessionStorage('salad');
   }
 

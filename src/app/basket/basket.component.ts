@@ -33,14 +33,10 @@ export class BasketComponent implements OnInit {
     this.orderArray = sessionStorage.getItem("orderData");
     this.orderArray = JSON.parse(this.orderArray);
 
-    if (this.orderArray === null) {
+    if (this.orderArray === null || this.orderArray.length === 0) {
       this.ifExitOrder = false;
-    } else {
-      this.getTotalPrice();
-      if (this.orderArray.length === 0) {
-        this.ifExitOrder = false;
-      } else this.ifExitOrder = true;
-    }
+    } else
+      this.ifExitOrder = true;
 
     let id = localStorage.getItem('userId');
 
@@ -55,6 +51,9 @@ export class BasketComponent implements OnInit {
             houseNumber: JSON.parse(this.user).house
           }
         });
+        if (JSON.parse(this.user).street === null && JSON.parse(this.user).house == null) {
+          this.setPickup();
+        }
       }
     )
   }

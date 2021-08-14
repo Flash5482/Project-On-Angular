@@ -116,9 +116,11 @@ export class PizzaService implements OnInit {
       }
     )
   }
-
+  failSignUp: boolean = true;
   addUser(user: any) {
-    return this.http.post('http://localhost:8080/users', user, this.httpOptions).subscribe(response => response);
+    return this.http.post('http://localhost:8080/users', user, this.httpOptions).subscribe(response => {
+      this.failSignUp = true;
+      return response},error => this.failSignUp = false);
   }
 
   getUser(userId: any) {

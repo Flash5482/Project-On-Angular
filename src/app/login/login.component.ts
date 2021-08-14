@@ -26,7 +26,6 @@ export class LoginComponent implements OnInit {
   constructor(public service: PizzaService, public dialog: MatDialog, private router: Router) {
   }
 
-
   ngOnInit(): void {
 
     this.loginForm = new FormGroup({
@@ -37,20 +36,14 @@ export class LoginComponent implements OnInit {
     this.signupForm = new FormGroup({
       phone: new FormControl('', [Validators.required]),
       name: new FormControl('', [Validators.required]),
-
       address: new FormGroup({
         city: new FormControl('',),
         street: new FormControl('',),
         houseNumber: new FormControl('',)
       }),
       passwordSignup: new FormControl('', [Validators.required]),
-
     });
-
-
   }
-
-
 
   get login() {
     return this.loginForm.get('login');
@@ -97,6 +90,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmitSignup() {
+
     let user = this.getObjUser(
       this.signupForm.get('name').value,
       this.signupForm.get('phone').value,
@@ -106,15 +100,15 @@ export class LoginComponent implements OnInit {
       this.signupForm.get('address').get('houseNumber').value
     );
     this.service.addUser(user);
+    if(!this.service.failSignUp){
+      this.dialog.open(DialogOnCreateOrderComponent, {width: '450px'});
+      setTimeout(() => {
+        this.showForm = false;
+        this.dialog.closeAll();
+      }, 2000)
+    }
 
-    this.dialog.open(DialogOnCreateOrderComponent, {width: '450px'});
-    setTimeout(() => {
-      this.showForm=false;
-      this.dialog.closeAll();
-
-    }, 2000)
   }
-
 
   onSubmit() {
     let obj = {

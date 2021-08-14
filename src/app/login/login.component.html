@@ -109,6 +109,9 @@
       </mat-form-field>
 
 
+      <div  *ngIf="!service.failSignUp" class="error">
+        <span>Such a user already exists</span>
+      </div>
 
       <button *ngIf="showForm" class="button-login" type="submit"  [ngClass]="{button2: signupForm.valid}" [disabled]="!signupForm.valid">
         <span>Sign-up</span>

@@ -1,13 +1,8 @@
-
-
-
-<div class="app-wrapper" >
+<div class="app-wrapper">
   <div class="header">
     <app-header></app-header>
   </div>
-
-  <div *ngIf="service.isDataLoaded "  class="app-wrapper__content"  >
-
+  <div *ngIf="service.isDataLoaded " class="app-wrapper__content">
     <router-outlet></router-outlet>
   </div>
   <div class="footer">
