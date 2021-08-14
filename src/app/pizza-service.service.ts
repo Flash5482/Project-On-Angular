@@ -18,8 +18,6 @@ export class PizzaService implements OnInit {
   pizzaArray: [] | any;
   public showCircle: boolean = false;
   public moveLine: boolean = false;
-  showWindowOnDelete: boolean = false;
-  overflowOnDelete: string = 'visible';
   disabledButton: boolean | any;
   apiToken: string | any;
   apiKey: string | any;
@@ -30,7 +28,6 @@ export class PizzaService implements OnInit {
   userId: any;
 
   constructor(private http: HttpClient, private router: Router) {
-
   }
 
   ngOnInit(): void {
@@ -40,19 +37,13 @@ export class PizzaService implements OnInit {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
         'Authorization': this.apiKey
-
       })
     };
   }
 
-
-  pizzaProducts: any;
-
   search() {
     return this.http.get('http://localhost:8080/products');
   }
-
-  arrayOfPizza: any;
 
   setProductsToSessionStorage(typeProducts: string) {
     if (sessionStorage.getItem('products')) {
@@ -106,24 +97,20 @@ export class PizzaService implements OnInit {
 
     return this.http.post('http://localhost:8080/login', credential).subscribe(response => {
         console.log('Password ', response);
+        this.statusLogin = true;
         this.isAdmin = JSON.parse(JSON.stringify(response)).isAdmin;
         this.userId = JSON.parse(JSON.stringify(response)).userId;
         localStorage.setItem('userId', JSON.parse(JSON.stringify(response)).userId);
         localStorage.setItem('isAdmin', JSON.parse(JSON.stringify(response)).isAdmin);
         localStorage.setItem('apiKey', JSON.parse(JSON.stringify(response)).token);
+        localStorage.setItem('statusLogin', this.statusLogin);
+
         if (this.isAdmin) {
           this.router.navigate(['delivery']);
         } else {
-
           this.router.navigate(['pizza']);
         }
-        this.statusLogin = true;
-        sessionStorage.setItem('statusLogin', this.statusLogin);
         this.showError = false;
-
-        console.log("Last cred", credential);
-
-        return this.apiToken = response;
       }, catchError => {
         this.showError = true;
       }
@@ -136,28 +123,15 @@ export class PizzaService implements OnInit {
 
   getUser(userId: any) {
     this.apiKey = localStorage.getItem('apiKey');
-
     this.httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Accept': 'application/json',
         'Authorization': this.apiKey
-
       })
     };
     console.log('http://localhost:8080/users/' + userId)
     return this.http.get('http://localhost:8080/users/' + userId, this.httpOptions);
-
-  }
-
-  closeWindowDelete() {
-    this.showWindowOnDelete = false;
-    this.overflowOnDelete = 'visible';
-  }
-
-  showWindowDelete() {
-    this.showWindowOnDelete = true;
-    this.overflowOnDelete = 'hidden';
   }
 
   move() {

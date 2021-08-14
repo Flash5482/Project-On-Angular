@@ -40,7 +40,7 @@ export class HeaderComponent implements OnInit {
     this.isAdmin = localStorage.getItem('isAdmin')
     this.service.isAdmin = JSON.parse(this.isAdmin);
 
-    this.statusLogin = sessionStorage.getItem('statusLogin')
+    this.statusLogin = localStorage.getItem('statusLogin')
     this.service.statusLogin = JSON.parse(this.statusLogin);
 
     this.orderArray = sessionStorage.getItem("orderData");

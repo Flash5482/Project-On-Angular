@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   typeOfLogin: string = '';
 
   hide = true;
-  showDorm: boolean = false;
+  showForm: boolean = false;
   arrayOfCity = [
     "Ivano-Frankivsk",
     "Lviv",
@@ -28,7 +28,6 @@ export class LoginComponent implements OnInit {
 
 
   ngOnInit(): void {
-
 
     this.loginForm = new FormGroup({
       login: new FormControl('', [Validators.required]),
@@ -45,7 +44,6 @@ export class LoginComponent implements OnInit {
         houseNumber: new FormControl('',)
       }),
       passwordSignup: new FormControl('', [Validators.required]),
-      secondPassword: new FormControl('', [Validators.required])
 
     });
 
@@ -111,7 +109,7 @@ export class LoginComponent implements OnInit {
 
     this.dialog.open(DialogOnCreateOrderComponent, {width: '450px'});
     setTimeout(() => {
-      this.showDorm=false;
+      this.showForm=false;
       this.dialog.closeAll();
 
     }, 2000)
@@ -119,16 +117,11 @@ export class LoginComponent implements OnInit {
 
 
   onSubmit() {
-
-    console.log(this.loginForm.get('login').value, this.loginForm.get('password').value);
     let obj = {
       username: this.loginForm.get('login').value,
       password: this.loginForm.get('password').value
     }
-
     this.service.login(obj);
-
-
   }
 
 }

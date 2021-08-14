@@ -15,15 +15,10 @@ interface OrderPizza {
 })
 export class CardComponent implements OnInit {
   @Input() pizzaItem: PizzaComponent | any;
-  @Input() setDataOfPizza: PizzaComponent | any;
-  @Input() getDataOfPizza: PizzaComponent | any;
   @Input() setDataToStorage: PizzaComponent | any;
 
-
   countOfPizza: number = 1;
-  public arrayForOrderData = {};
-  public array: [] | any;
-  isDataLoaded: boolean = false;
+  public objectForOrderData = {};
 
   constructor(public servicePizza: PizzaService) {
   }
@@ -32,16 +27,14 @@ export class CardComponent implements OnInit {
   }
 
   setOrder(price: any, count: any, title: string, img: string) {
-
     this.servicePizza.showCircle = true;
-    this.arrayForOrderData = {
+    this.objectForOrderData = {
       price,
       count,
       title,
       img,
     };
-    this.setDataToStorage(this.arrayForOrderData);
-
+    this.setDataToStorage(this.objectForOrderData);
     this.servicePizza.moveLine = true;
     this.servicePizza.disabledButton = true;
     setTimeout(() => {
@@ -53,7 +46,8 @@ export class CardComponent implements OnInit {
   countInInput(event: any) {
     const value = event.target.value;
     this.countOfPizza = value;
-    if (value < 1) {
+    if (isNaN(value) || value <= 1) {
+      event.target.value = 1;
       this.countOfPizza = 1;
     }
   }

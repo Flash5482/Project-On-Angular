@@ -16,11 +16,10 @@
       </div>
     </div>
     <div class="wrap-content__body">
-      <app-card-basket [title]="title" (getTitle)="deleteProductFromBasket($event)"
+      <app-card-basket  (getTitle)="deleteProductFromBasket($event)"
                        [deleteProduct]="deleteProductFromOrder"
                        [changeCounts]="changeCounts"
-                       [totalPrice]="this.totalPrice"
-                       *ngFor="let order of orderArray" [orderArray]="orderArray" [order]="order"></app-card-basket>
+                       *ngFor="let order of orderArray" [order]="order"></app-card-basket>
     </div>
     <div class="total">
       <div class="total__item" *ngIf="ifExitOrder; else unset ">Total:

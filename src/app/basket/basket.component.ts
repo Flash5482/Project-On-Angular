@@ -17,22 +17,16 @@ export class BasketComponent implements OnInit {
   delivery: boolean = true;
   pickup: boolean = false;
   title: string = '';
-
-  value = 'Clear me'
   orderForm: FormGroup | any;
+  userPhone: any;
+  user: any;
+
 
   arrayOfCity = [
     "Ivano-Frankivsk",
     "Lviv",
     "Kiev"
   ];
-  userPhone: any;
-  user: any;
-
-  userName: any;
-  userCity: any;
-  userStreet: any;
-  userHouseNumber: any;
 
 
   constructor(public service: PizzaService, public dialog: MatDialog, private router: Router) {
@@ -43,18 +37,15 @@ export class BasketComponent implements OnInit {
       this.ifExitOrder = false;
     } else {
       this.getTotalPrice();
-      if (this.orderArray.length === 0 || this.orderArray.length === undefined) {
+      if (this.orderArray.length === 0) {
         this.ifExitOrder = false;
       } else this.ifExitOrder = true;
     }
 
     let id = localStorage.getItem('userId');
 
-    console.log(id);
-
-    let user = service.getUser(id).subscribe(response => {
+    service.getUser(id).subscribe(response => {
         this.user = JSON.stringify(response);
-        console.log(this.userPhone);
         this.orderForm.patchValue({
           phoneNumber: JSON.parse(this.user).phoneNumber,
           name: JSON.parse(this.user).name,
@@ -66,10 +57,7 @@ export class BasketComponent implements OnInit {
         });
       }
     )
-
-
   }
-
 
   ngOnInit(): void {
     this.orderForm = new FormGroup({
@@ -115,9 +103,6 @@ export class BasketComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.orderArray);
-    console.log(this.orderForm.value);
-
     this.objectOrder = this.mergeArray(
       this.orderForm.get("name").value,
       this.orderForm.get("phoneNumber").value,
@@ -129,23 +114,18 @@ export class BasketComponent implements OnInit {
       this.totalPrice);
 
     this.service.postOrder(this.objectOrder);
-    //this.orderArray = null;
     this.service.showCircle = false;
-    //this.ifExitOrder = false;
+
     this.dialog.open(DialogOnCreateOrderComponent, {width: '450px'});
     setTimeout(() => {
       this.dialog.closeAll();
       this.router.navigate(['pizza']);
     }, 2000)
-
-
   }
-
 
   setDelivery() {
     this.delivery = true;
     this.pickup = false;
-
     this.orderForm.get('address').setValue({
       city: "Ivano-Frankivsk",
       street: "",
@@ -156,26 +136,12 @@ export class BasketComponent implements OnInit {
   setPickup() {
     this.delivery = false;
     this.pickup = true;
-
     this.orderForm.get('address').setValue({
       city: "Ivano-Frankivsk",
       street: "def",
       houseNumber: "def"
     });
 
-  }
-
-
-  elementDelete(element: any) {
-    this.orderArray = element;
-  }
-
-  elementDelete1(element: any) {
-    this.ifExitOrder = element;
-  }
-
-  changeTotalPrice(element: any) {
-    this.totalPrice = element;
   }
 
   getTotalPrice() {
@@ -208,7 +174,6 @@ export class BasketComponent implements OnInit {
           symbol.target.value = 1;
         }
         this.orderArray.find((item: any) => item.title === title).count = symbol.target.value;
-
       }
         break;
     }
@@ -228,8 +193,7 @@ export class BasketComponent implements OnInit {
 
     this.orderArray = this.orderArray.filter((item: any) => item.title !== this.title);
     sessionStorage.setItem("orderData", JSON.stringify(this.orderArray));
-
-    this.totalPrice = this.orderArray.reduce((current: number, nex: any) => current + nex.price * nex.count, 0);
+    this.getTotalPrice();
   }
 
 }

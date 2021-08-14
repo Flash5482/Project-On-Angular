@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {BasketComponent} from "../basket.component";
 import {PizzaService} from "../../pizza-service.service";
 import {MatDialog} from "@angular/material/dialog";
@@ -9,22 +9,15 @@ import {WindowOnDeleteProductComponent} from "../../dialogWindow/window-on-delet
   templateUrl: './card-basket.component.html',
   styleUrls: ['./card-basket.component.scss']
 })
-export class CardBasketComponent implements OnInit {
+export class CardBasketComponent {
   @Input() order: BasketComponent | any;
   @Input() changeCounts: BasketComponent | any;
-  @Input() orderArray: BasketComponent | any;
-  @Input() totalPrice: BasketComponent | any;
-  @Input() title: BasketComponent | any;
-  @Output() getTitle = new EventEmitter();
   @Input() deleteProduct: BasketComponent | any;
+  @Output() getTitle = new EventEmitter();
 
 
   constructor(public service: PizzaService, public dialog: MatDialog) {
   }
-
-  ngOnInit(): void {
-  }
-
 
   deleteProductFromOrder(title: any) {
     this.dialog.open(WindowOnDeleteProductComponent, {
@@ -35,6 +28,5 @@ export class CardBasketComponent implements OnInit {
     );
     this.getTitle.emit(title);
   }
-
 
 }

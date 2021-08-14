@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {PizzaService} from "../pizza-service.service";
 
@@ -7,7 +7,7 @@ import {PizzaService} from "../pizza-service.service";
   templateUrl: './admin-page.component.html',
   styleUrls: ['./admin-page.component.scss']
 })
-export class AdminPageComponent implements OnInit {
+export class AdminPageComponent {
   arrayOfOrders: [] | any;
   arrayOfOrdersInProgress: [] | any;
   arrayOfOrdersDone: [] | any;
@@ -28,15 +28,8 @@ export class AdminPageComponent implements OnInit {
       });
       this.arrayOfOrdersInProgress = this.allOrders.filter((item: any) => item.status === "inprogress");
       this.arrayOfOrdersDone = this.allOrders.filter((item: any) => item.status === "done");
-
       this.showItem = true;
-
-
     });
-
-  }
-
-  ngOnInit(): void {
 
   }
 
@@ -51,7 +44,7 @@ export class AdminPageComponent implements OnInit {
     }
     this.service.updateStatus(object);
     if (event.previousContainer === event.container) {
-      moveItemInArray(this.arrayOfOrders/*event.container.data*/, event.previousIndex, event.currentIndex);
+      moveItemInArray(this.arrayOfOrders, event.previousIndex, event.currentIndex);
     } else {
       transferArrayItem(event.previousContainer.data,
         event.container.data,

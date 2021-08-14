@@ -1,7 +1,7 @@
 <div class="wrap">
   <div class="container">
 
-    <form *ngIf="!showDorm" class="login-form" [formGroup]="loginForm" (ngSubmit)='onSubmit()'>
+    <form *ngIf="!showForm" class="login-form" [formGroup]="loginForm" (ngSubmit)='onSubmit()'>
       <p>Login</p>
 
       <mat-form-field class="example-full-width logins" appearance="outline">
@@ -34,20 +34,20 @@
       <div  *ngIf="service.showError" class="error">
         <span>Your password or phone are incorrect</span>
       </div>
-      <button *ngIf="!showDorm" class="button-login" type="submit" [ngClass]="{button2: loginForm.valid}" [disabled]="!loginForm.valid">
+      <button *ngIf="!showForm" class="button-login" type="submit" [ngClass]="{button2: loginForm.valid}" [disabled]="!loginForm.valid">
         Login
       </button>
 
 
       <div class="signup">
         <span>Not a member?</span>
-        <div (click)="showDorm = true" class="signup-click">Signup now</div>
+        <div (click)="showForm = true" class="signup-click">Signup now</div>
       </div>
 
     </form>
 
 
-    <form *ngIf="showDorm" class="login-form" [formGroup]="signupForm" (ngSubmit)='onSubmitSignup()'>
+    <form *ngIf="showForm" class="login-form" [formGroup]="signupForm" (ngSubmit)='onSubmitSignup()'>
       <p>Signup</p>
 
       <mat-form-field class="example-full-width logins" appearance="outline">
@@ -65,7 +65,7 @@
         <mat-label>Name</mat-label>
         <input
           type="text" formControlName="name" maxlength="50" matInput placeholder="Jhon">
-        <mat-error *ngIf="phone.hasError('required')">
+        <mat-error *ngIf="name.hasError('required')">
           Name is <strong>required</strong>
         </mat-error>
       </mat-form-field>
@@ -110,13 +110,13 @@
 
 
 
-      <button *ngIf="showDorm" class="button-login" type="submit"  [ngClass]="{button2: signupForm.valid}" [disabled]="!signupForm.valid">
+      <button *ngIf="showForm" class="button-login" type="submit"  [ngClass]="{button2: signupForm.valid}" [disabled]="!signupForm.valid">
         <span>Sign-up</span>
       </button>
 
       <div class="signup">
         <span>Already have an account? </span>
-        <div (click)="showDorm = false" class="signup-click">Login</div>
+        <div (click)="showForm = false" class="signup-click">Login</div>
       </div>
 
     </form>
