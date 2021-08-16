@@ -21,7 +21,6 @@ export class AdminPageComponent {
   constructor(public service: PizzaService) {
     service.getOrder().subscribe(response => {
       this.allOrders = JSON.parse(JSON.stringify(response));
-
       this.arrayOfOrders = this.allOrders.filter((item: any) => {
         item.product = JSON.parse(item.product);
         return item.status === "todo"

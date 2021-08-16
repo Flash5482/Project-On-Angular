@@ -79,9 +79,7 @@ export class LoginComponent implements OnInit {
     return this.signupForm.get('passwordSignup');
   }
 
-  get secondPassword() {
-    return this.signupForm.get('secondPassword');
-  }
+
 
   getObjUser(name: any, phoneNumber: any, password: any, city: any, street: any, house: any, roleId: string = '2') {
     return {
@@ -90,7 +88,6 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmitSignup() {
-
     let user = this.getObjUser(
       this.signupForm.get('name').value,
       this.signupForm.get('phone').value,

@@ -28,30 +28,32 @@ export class BasketComponent implements OnInit {
     "Kiev"
   ];
 
-
   constructor(public service: PizzaService, public dialog: MatDialog, private router: Router) {
     this.orderArray = sessionStorage.getItem("orderData");
     this.orderArray = JSON.parse(this.orderArray);
 
     if (this.orderArray === null || this.orderArray.length === 0) {
       this.ifExitOrder = false;
-    } else
+    } else {
+      this.getTotalPrice();
       this.ifExitOrder = true;
+    }
 
     let id = localStorage.getItem('userId');
 
     service.getUser(id).subscribe(response => {
         this.user = JSON.stringify(response);
         this.orderForm.patchValue({
-          phoneNumber: JSON.parse(this.user).phoneNumber,
-          name: JSON.parse(this.user).name,
-          address: {
-            city: JSON.parse(this.user).city,
-            street: JSON.parse(this.user).street,
-            houseNumber: JSON.parse(this.user).house
+            phoneNumber: JSON.parse(this.user).phoneNumber,
+            name: JSON.parse(this.user).name,
+            address: {
+              city: JSON.parse(this.user).city,
+              street: JSON.parse(this.user).street,
+              houseNumber: JSON.parse(this.user).house
+            }
           }
-        });
-        if (JSON.parse(this.user).street === null && JSON.parse(this.user).house == null) {
+        );
+        if (JSON.parse(this.user).street === '' && JSON.parse(this.user).house === '') {
           this.setPickup();
         }
       }

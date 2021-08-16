@@ -63,6 +63,7 @@ export class PizzaService implements OnInit {
 
   postOrder(order: any) {
     return this.http.post('http://localhost:8080/orders', order).subscribe(response => response);
+
   }
 
 
@@ -94,9 +95,8 @@ export class PizzaService implements OnInit {
 
   login(credential: any) {
     console.log("First cred", this.httpOptions);
-
     return this.http.post('http://localhost:8080/login', credential).subscribe(response => {
-        console.log('Password ', response);
+
         this.statusLogin = true;
         this.isAdmin = JSON.parse(JSON.stringify(response)).isAdmin;
         this.userId = JSON.parse(JSON.stringify(response)).userId;
@@ -132,7 +132,6 @@ export class PizzaService implements OnInit {
         'Authorization': this.apiKey
       })
     };
-    console.log('http://localhost:8080/users/' + userId)
     return this.http.get('http://localhost:8080/users/' + userId, this.httpOptions);
   }
 

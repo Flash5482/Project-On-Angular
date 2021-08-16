@@ -23,7 +23,7 @@ export class WindowOnLogOutComponent implements OnInit {
   logOut() {
     this.route.navigate(['login']);
     this.service.statusLogin = false;
-    sessionStorage.setItem('statusLogin', 'false');
+    localStorage.setItem('statusLogin', 'false');
     this.service.isAdmin = false;
     localStorage.clear();
     this.dialogRef.close();

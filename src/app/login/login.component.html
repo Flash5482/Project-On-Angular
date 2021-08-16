@@ -21,20 +21,23 @@
 
       <mat-form-field appearance="outline">
         <mat-label>Enter your password</mat-label>
-        <input formControlName="password"  matInput [type]="hide ? 'password' : 'text'" maxlength="70">
-        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-                [attr.aria-pressed]="hide">
-          <mat-icon>{{hide ? '' : ''}}</mat-icon>
-        </button>
+        <input formControlName="password" matInput [type]="hide ? 'password' : 'text'" maxlength="70">
+        <div matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+             [attr.aria-pressed]="hide">
+          <mat-icon>
+            <img *ngIf="!hide" src="./assets/img/eye_visible_hide.svg" alt="">
+            <img *ngIf="hide" src="./assets/img/eye_slash_visible.svg" alt=""></mat-icon>
+        </div>
         <mat-error *ngIf="password.hasError('required')">
           Password is <strong>required</strong>
         </mat-error>
       </mat-form-field>
 
-      <div  *ngIf="service.showError" class="error">
+      <div *ngIf="service.showError" class="error">
         <span>Your password or phone are incorrect</span>
       </div>
-      <button *ngIf="!showForm" class="button-login" type="submit" [ngClass]="{button2: loginForm.valid}" [disabled]="!loginForm.valid">
+      <button *ngIf="!showForm" class="button-login" type="submit" [ngClass]="{button2: loginForm.valid}"
+              [disabled]="!loginForm.valid">
         Login
       </button>
 
@@ -99,21 +102,24 @@
       <mat-form-field appearance="outline">
         <mat-label>Enter your password</mat-label>
         <input formControlName="passwordSignup" matInput [type]="hide ? 'password' : 'text'" maxlength="70">
-        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-                [attr.aria-pressed]="hide">
-          <mat-icon>{{hide ? '' : ''}}</mat-icon>
-        </button>
+        <div matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+             [attr.aria-pressed]="hide">
+          <mat-icon>
+            <img *ngIf="!hide" src="./assets/img/eye_visible_hide.svg" alt="">
+            <img *ngIf="hide" src="./assets/img/eye_slash_visible.svg" alt=""></mat-icon>
+        </div>
         <mat-error *ngIf="passwordSignup.hasError('required')">
           Password is <strong>required</strong>
         </mat-error>
       </mat-form-field>
 
 
-      <div  *ngIf="!service.failSignUp" class="error">
+      <div *ngIf="!service.failSignUp" class="error">
         <span>Such a user already exists</span>
       </div>
 
-      <button *ngIf="showForm" class="button-login" type="submit"  [ngClass]="{button2: signupForm.valid}" [disabled]="!signupForm.valid">
+      <button *ngIf="showForm" class="button-login" type="submit" [ngClass]="{button2: signupForm.valid}"
+              [disabled]="!signupForm.valid">
         <span>Sign-up</span>
       </button>
 

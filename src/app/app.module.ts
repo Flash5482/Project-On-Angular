@@ -27,6 +27,7 @@ import {SlideLineComponent} from './slide-line/slide-line.component';
 import {MatInputModule} from "@angular/material/input";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MatIconModule} from "@angular/material/icon";
+
 import {MatOptionModule} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";
 import {MatDialogModule} from "@angular/material/dialog";
@@ -34,11 +35,12 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MatExpansionModule} from "@angular/material/expansion";
 import {DialogOnCreateOrderComponent} from "./dialogWindow/dialog-on-createOrder/dialog-on-createOrder.component";
-import { WindowOnDeleteProductComponent } from './dialogWindow/window-on-delete-product/window-on-delete-product.component';
+import {WindowOnDeleteProductComponent} from './dialogWindow/window-on-delete-product/window-on-delete-product.component';
 import {ProgressBarOnDeleteComponent} from "./progressBar/progress-bar-on-delete/progress-bar-on-delete.component";
-import { LoginComponent } from './login/login.component';
+import {LoginComponent} from './login/login.component';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
-import { WindowOnLogOutComponent } from './dialogWindow/window-on-log-out/window-on-log-out.component';
+import {WindowOnLogOutComponent} from './dialogWindow/window-on-log-out/window-on-log-out.component';
+import {AdminGuard} from "./login/admin.guard";
 
 const appRoutes: Routes = [
   {path: '', component: PizzaComponent},
@@ -47,7 +49,7 @@ const appRoutes: Routes = [
   {path: 'drinks', component: DrinksComponent},
   {path: 'dessert', component: DessertComponent},
   {path: 'basket', component: BasketComponent},
-  {path: 'delivery', component: AdminPageComponent},
+  {path: 'delivery', component: AdminPageComponent, canActivate: [AdminGuard]},
   {path: 'login', component: LoginComponent},
   {path: '**', component: NotFoundComponent}
 ]
@@ -73,7 +75,6 @@ const appRoutes: Routes = [
     ProgressBarOnDeleteComponent,
     LoginComponent,
     WindowOnLogOutComponent,
-
   ],
   imports: [
     MatProgressSpinnerModule,
@@ -94,8 +95,6 @@ const appRoutes: Routes = [
     MatInputModule,
     BrowserAnimationsModule,
     MatOptionModule,
-
-
   ],
   providers: [PizzaService, OrderService],
   bootstrap: [AppComponent]
