@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PizzaService} from "./pizza-service.service";
 
 @Component({
@@ -6,17 +6,17 @@ import {PizzaService} from "./pizza-service.service";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   constructor(public service: PizzaService) {
-
-    service.search().subscribe(response => {
-       let pizzaArray = response;
-        sessionStorage.setItem('products', JSON.stringify(pizzaArray));
-        service.isDataLoaded= true;
-      });
   }
 
-
+  ngOnInit(): void {
+    this.service.search().subscribe(response => {
+      let pizzaArray = response;
+      sessionStorage.setItem('products', JSON.stringify(pizzaArray));
+      this.service.isDataLoaded= true;
+    });
+  }
 
   title = 'Project-On-Angular';
 }

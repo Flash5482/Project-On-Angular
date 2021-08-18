@@ -32,13 +32,7 @@ export class PizzaService implements OnInit {
 
   ngOnInit(): void {
     this.apiKey = localStorage.getItem('apiKey');
-    this.httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': this.apiKey
-      })
-    };
+
   }
 
   search() {
@@ -63,38 +57,21 @@ export class PizzaService implements OnInit {
 
   postOrder(order: any) {
     return this.http.post('http://localhost:8080/orders', order).subscribe(response => response);
-
   }
 
 
   getOrder() {
     this.apiKey = localStorage.getItem('apiKey');
-    this.httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': this.apiKey
-      })
-    }
-    return this.http.get('http://localhost:8080/orders', this.httpOptions);
+    return this.http.get('http://localhost:8080/orders');
   }
 
   updateStatus(order: any) {
-    this.apiKey = localStorage.getItem('apiKey');
-    this.httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': this.apiKey
-      })
-    }
-    return this.http.put('http://localhost:8080/orders', order, this.httpOptions).subscribe(response => response);
+    return this.http.put('http://localhost:8080/orders', order).subscribe(response => response);
   }
 
   statusLogin: any = false;
 
   login(credential: any) {
-    console.log("First cred", this.httpOptions);
     return this.http.post('http://localhost:8080/login', credential).subscribe(response => {
 
         this.statusLogin = true;
@@ -116,23 +93,18 @@ export class PizzaService implements OnInit {
       }
     )
   }
+
   failSignUp: boolean = true;
+
   addUser(user: any) {
-    return this.http.post('http://localhost:8080/users', user, this.httpOptions).subscribe(response => {
-      this.failSignUp = true;
-      return response},error => this.failSignUp = false);
+    return this.http.post('http://localhost:8080/users', user).subscribe(response => {
+        this.failSignUp = true;
+      },
+      catchError => this.failSignUp = false);
   }
 
   getUser(userId: any) {
-    this.apiKey = localStorage.getItem('apiKey');
-    this.httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': this.apiKey
-      })
-    };
-    return this.http.get('http://localhost:8080/users/' + userId, this.httpOptions);
+    return this.http.get('http://localhost:8080/users/' + userId);
   }
 
   move() {

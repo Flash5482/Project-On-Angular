@@ -11,12 +11,13 @@ export class DrinksComponent implements OnInit {
   drinksArray: [] | any;
   setDataToStorage: any;
   constructor(public pizzaServ: PizzaService) {
-    this.setDataToStorage = this.pizzaServ.setDataToStorage;
 
-    this.drinksArray = pizzaServ.setProductsToSessionStorage('drinks');
 
   }
   ngOnInit(): void {
+    this.setDataToStorage = this.pizzaServ.setDataToStorage;
+
+    this.drinksArray = this.pizzaServ.setProductsToSessionStorage('drinks');
   }
 
 }

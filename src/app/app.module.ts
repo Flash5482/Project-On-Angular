@@ -21,7 +21,7 @@ import {PizzaService} from "./pizza-service.service";
 import {OrderService} from "./order.service";
 import {CardBasketComponent} from './basket/card-basket/card-basket.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {AdminPageComponent} from './admin-page/admin-page.component';
 import {SlideLineComponent} from './slide-line/slide-line.component';
 import {MatInputModule} from "@angular/material/input";
@@ -41,6 +41,7 @@ import {LoginComponent} from './login/login.component';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {WindowOnLogOutComponent} from './dialogWindow/window-on-log-out/window-on-log-out.component';
 import {AdminGuard} from "./login/admin.guard";
+import {TokenInterceptor} from "./login/token.interceptor";
 
 const appRoutes: Routes = [
   {path: '', component: PizzaComponent},
@@ -96,7 +97,11 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     MatOptionModule,
   ],
-  providers: [PizzaService, OrderService],
+  providers: [PizzaService, OrderService, {
+    provide: HTTP_INTERCEPTORS,
+    multi: true,
+    useClass: TokenInterceptor
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule {

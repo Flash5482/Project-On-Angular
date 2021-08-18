@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {PizzaService} from "../pizza-service.service";
 
@@ -7,7 +7,7 @@ import {PizzaService} from "../pizza-service.service";
   templateUrl: './admin-page.component.html',
   styleUrls: ['./admin-page.component.scss']
 })
-export class AdminPageComponent {
+export class AdminPageComponent implements OnInit  {
   arrayOfOrders: [] | any;
   arrayOfOrdersInProgress: [] | any;
   arrayOfOrdersDone: [] | any;
@@ -19,7 +19,10 @@ export class AdminPageComponent {
 
 
   constructor(public service: PizzaService) {
-    service.getOrder().subscribe(response => {
+  }
+
+  ngOnInit(): void {
+    this.service.getOrder().subscribe(response => {
       this.allOrders = JSON.parse(JSON.stringify(response));
       this.arrayOfOrders = this.allOrders.filter((item: any) => {
         item.product = JSON.parse(item.product);
@@ -29,7 +32,6 @@ export class AdminPageComponent {
       this.arrayOfOrdersDone = this.allOrders.filter((item: any) => item.status === "done");
       this.showItem = true;
     });
-
   }
 
 
@@ -51,4 +53,6 @@ export class AdminPageComponent {
         event.currentIndex);
     }
   }
+
+
 }

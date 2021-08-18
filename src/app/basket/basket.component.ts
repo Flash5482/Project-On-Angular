@@ -29,6 +29,11 @@ export class BasketComponent implements OnInit {
   ];
 
   constructor(public service: PizzaService, public dialog: MatDialog, private router: Router) {
+
+  }
+
+  ngOnInit(): void {
+
     this.orderArray = sessionStorage.getItem("orderData");
     this.orderArray = JSON.parse(this.orderArray);
 
@@ -39,9 +44,25 @@ export class BasketComponent implements OnInit {
       this.ifExitOrder = true;
     }
 
+    this.orderForm = new FormGroup({
+      phoneNumber: new FormControl('',
+        [Validators.required, Validators.minLength(10), Validators.maxLength(10)]),
+      name: new FormControl('', [Validators.required, Validators.minLength(2),]),
+      comment: new FormControl('', [Validators.maxLength(200)]),
+      address: new FormGroup(
+        {
+          city: new FormControl('Ivano-Frankivsk'),
+          street: new FormControl('', [Validators.required]),
+          houseNumber: new FormControl('', [Validators.required])
+        }
+      )
+    });
+    this.orderForm.valueChanges.subscribe((status: any) => console.log(status));
+    console.log(this.orderForm.get('name').statusChanges.subscribe((status: any) => console.log(status)));
+
     let id = localStorage.getItem('userId');
 
-    service.getUser(id).subscribe(response => {
+    this.service.getUser(id).subscribe(response => {
         this.user = JSON.stringify(response);
         this.orderForm.patchValue({
             phoneNumber: JSON.parse(this.user).phoneNumber,
@@ -60,31 +81,16 @@ export class BasketComponent implements OnInit {
     )
   }
 
-  ngOnInit(): void {
-    this.orderForm = new FormGroup({
-      phoneNumber: new FormControl('',
-        [Validators.required, Validators.minLength(10), Validators.maxLength(10)]),
-      name: new FormControl('', [Validators.required, Validators.minLength(2),]),
-      comment: new FormControl('', [Validators.maxLength(200)]),
-      address: new FormGroup(
-        {
-          city: new FormControl('Ivano-Frankivsk'),
-          street: new FormControl('', [Validators.required]),
-          houseNumber: new FormControl('', [Validators.required])
-        }
-      )
-    });
-    this.orderForm.valueChanges.subscribe((status: any) => console.log(status));
-    console.log(this.orderForm.get('name').statusChanges.subscribe((status: any) => console.log(status)));
-  }
-
 
   get name() {
-    return this.orderForm.get('name');
+    return this.orderForm.get("name");
   }
 
   get phoneNumber() {
     return this.orderForm.get('phoneNumber');
+  }
+  get comment() {
+    return this.orderForm.get('comment');
   }
 
   get houseNumber() {
@@ -93,6 +99,9 @@ export class BasketComponent implements OnInit {
 
   get street() {
     return this.orderForm.get('address').get('street');
+  }
+  get city() {
+    return this.orderForm.get('address').get('city');
   }
 
   objectOrder: any;
@@ -105,12 +114,12 @@ export class BasketComponent implements OnInit {
 
   onSubmit() {
     this.objectOrder = this.mergeArray(
-      this.orderForm.get("name").value,
-      this.orderForm.get("phoneNumber").value,
-      this.orderForm.get("comment").value,
-      this.orderForm.get("address").get("city").value,
-      this.orderForm.get("address").get("street").value,
-      this.orderForm.get("address").get("houseNumber").value,
+      this.name.value,
+      this.phoneNumber.value,
+      this.comment.value,
+      this.city.value,
+      this.street.value,
+      this.houseNumber.value,
       JSON.stringify(this.orderArray),
       this.totalPrice);
 

@@ -47,12 +47,10 @@ export class LoginComponent implements OnInit {
 
   get login() {
     return this.loginForm.get('login');
-
   }
 
   get password() {
     return this.loginForm.get('password');
-
   }
 
   get name() {
@@ -63,22 +61,9 @@ export class LoginComponent implements OnInit {
     return this.signupForm.get('phone');
   }
 
-  get city() {
-    return this.signupForm.get('address').get('city');
-  }
-
-  get street() {
-    return this.signupForm.get('address').get('street');
-  }
-
-  get houseNumber() {
-    return this.signupForm.get('address').get('houseNumber');
-  }
-
   get passwordSignup() {
     return this.signupForm.get('passwordSignup');
   }
-
 
 
   getObjUser(name: any, phoneNumber: any, password: any, city: any, street: any, house: any, roleId: string = '2') {
@@ -86,7 +71,6 @@ export class LoginComponent implements OnInit {
       name, phoneNumber, password, city, street, house, roleId
     }
   }
-
   onSubmitSignup() {
     let user = this.getObjUser(
       this.signupForm.get('name').value,
@@ -97,13 +81,16 @@ export class LoginComponent implements OnInit {
       this.signupForm.get('address').get('houseNumber').value
     );
     this.service.addUser(user);
-    if(!this.service.failSignUp){
-      this.dialog.open(DialogOnCreateOrderComponent, {width: '450px'});
-      setTimeout(() => {
-        this.showForm = false;
-        this.dialog.closeAll();
-      }, 2000)
-    }
+
+    setTimeout(() => {
+      if (this.service.failSignUp) {
+        this.dialog.open(DialogOnCreateOrderComponent, {width: '450px'});
+        setTimeout(() => {
+          this.showForm = false;
+          this.dialog.closeAll();
+        }, 2000)
+      }
+    }, 1000);
 
   }
 
