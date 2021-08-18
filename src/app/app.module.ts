@@ -42,6 +42,8 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {WindowOnLogOutComponent} from './dialogWindow/window-on-log-out/window-on-log-out.component';
 import {AdminGuard} from "./login/admin.guard";
 import {TokenInterceptor} from "./login/token.interceptor";
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+
 
 const appRoutes: Routes = [
   {path: '', component: PizzaComponent},
@@ -78,6 +80,7 @@ const appRoutes: Routes = [
     WindowOnLogOutComponent,
   ],
   imports: [
+    MatAutocompleteModule,
     MatProgressSpinnerModule,
     MatIconModule,
     MatExpansionModule,
