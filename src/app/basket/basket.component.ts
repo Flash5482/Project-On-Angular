@@ -33,7 +33,7 @@ export class BasketComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.service.showSearchInput = false;
     this.orderArray = sessionStorage.getItem("orderData");
     this.orderArray = JSON.parse(this.orderArray);
 
@@ -89,6 +89,7 @@ export class BasketComponent implements OnInit {
   get phoneNumber() {
     return this.orderForm.get('phoneNumber');
   }
+
   get comment() {
     return this.orderForm.get('comment');
   }
@@ -100,6 +101,7 @@ export class BasketComponent implements OnInit {
   get street() {
     return this.orderForm.get('address').get('street');
   }
+
   get city() {
     return this.orderForm.get('address').get('city');
   }

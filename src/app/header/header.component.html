@@ -43,16 +43,8 @@
 <div (click)="moveMenu()" class="menu__burger" [ngClass]="{active:showMenu}">
   <span></span>
 </div>
-<div class="search">
-  <form class="example-form">
-    <input class="inputSearch" type="text" matInput [formControl]="searchInput" [matAutocomplete]="auto">
-    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-        {{option.name}}
-      </mat-option>
-    </mat-autocomplete>
-  </form>
-</div>
+
+<app-search *ngIf="service.showSearchInput"></app-search>
 
 <app-slide-line></app-slide-line>
 

@@ -15,8 +15,8 @@ export class DrinksComponent implements OnInit {
 
   }
   ngOnInit(): void {
+    this.pizzaServ.showSearchInput = true;
     this.setDataToStorage = this.pizzaServ.setDataToStorage;
-
     this.drinksArray = this.pizzaServ.setProductsToSessionStorage('drinks');
   }
 

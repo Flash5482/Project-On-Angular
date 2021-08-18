@@ -14,6 +14,8 @@ export class DessertComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.pizzaServ.showSearchInput = true;
+
     this.setDataToStorage = this.pizzaServ.setDataToStorage;
     this.desertArray = this.pizzaServ.setProductsToSessionStorage('desserts');
   }

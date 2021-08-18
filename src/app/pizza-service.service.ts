@@ -26,6 +26,7 @@ export class PizzaService implements OnInit {
   isDataLoaded: boolean = false;
   showError: boolean = false;
   userId: any;
+  showSearchInput: boolean = true;
 
   constructor(private http: HttpClient, private router: Router) {
   }

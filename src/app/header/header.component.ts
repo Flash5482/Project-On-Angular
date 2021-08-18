@@ -6,21 +6,26 @@ import {Router} from "@angular/router";
 import {FormControl} from "@angular/forms";
 import {Observable} from "rxjs";
 import {map, startWith} from "rxjs/operators";
+import {animate} from "@angular/animations";
 
 export interface navItem {
   title: string,
   image: string,
   path: string
 }
+
 export interface User {
   name: string;
 }
+export interface Products {
+  title: string;
+}
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-
 
 
 export class HeaderComponent implements OnInit {
@@ -39,6 +44,8 @@ export class HeaderComponent implements OnInit {
   ];
 
   filteredOptions: Observable<User[]> | any;
+  //filteredOptions: Observable<Products[]> | any;
+
 
   constructor(public service: PizzaService, private route: Router, public dialog: MatDialog,) {
 
@@ -48,8 +55,15 @@ export class HeaderComponent implements OnInit {
     this.showMenu = false;
   };
 
+  arrayOfTitleProducts: [] | any;
+
+
 
   ngOnInit(): void {
+    this.orderArray = sessionStorage.getItem("products");
+    this.orderArray = JSON.parse(this.orderArray);
+    this.arrayOfTitleProducts = this.orderArray.map((item: any) =>({title: item.title}));
+    console.log(this.arrayOfTitleProducts);
 
     this.isAdmin = localStorage.getItem('isAdmin')
     this.service.isAdmin = JSON.parse(this.isAdmin);
@@ -65,6 +79,7 @@ export class HeaderComponent implements OnInit {
     } else {
       this.service.showCircle = false;
     }
+
 
     this.filteredOptions = this.searchInput.valueChanges
       .pipe(

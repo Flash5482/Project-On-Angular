@@ -15,6 +15,7 @@ export class SaladComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.pizzaServ.showSearchInput = true;
     this.setDataToStorage = this.pizzaServ.setDataToStorage;
     this.saladArray = this.pizzaServ.setProductsToSessionStorage('salad');
   }

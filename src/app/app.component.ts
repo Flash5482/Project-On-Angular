@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {PizzaService} from "./pizza-service.service";
+import {NavigationEnd, Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -7,10 +8,14 @@ import {PizzaService} from "./pizza-service.service";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  constructor(public service: PizzaService) {
+  currentRoute: string | any;
+  constructor(public service: PizzaService,private router: Router) {
+
   }
 
   ngOnInit(): void {
+
+
     this.service.search().subscribe(response => {
       let pizzaArray = response;
       sessionStorage.setItem('products', JSON.stringify(pizzaArray));

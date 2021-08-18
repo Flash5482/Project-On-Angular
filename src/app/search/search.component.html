@@ -1,0 +1,10 @@
+<div class="search">
+  <form class="example-form">
+    <input class="inputSearch" type="text" matInput [formControl]="searchInput" [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+        {{option.name}}
+      </mat-option>
+    </mat-autocomplete>
+  </form>
+</div>

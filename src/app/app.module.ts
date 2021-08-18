@@ -43,6 +43,7 @@ import {WindowOnLogOutComponent} from './dialogWindow/window-on-log-out/window-o
 import {AdminGuard} from "./login/admin.guard";
 import {TokenInterceptor} from "./login/token.interceptor";
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { SearchComponent } from './search/search.component';
 
 
 const appRoutes: Routes = [
@@ -78,6 +79,7 @@ const appRoutes: Routes = [
     ProgressBarOnDeleteComponent,
     LoginComponent,
     WindowOnLogOutComponent,
+    SearchComponent,
   ],
   imports: [
     MatAutocompleteModule,

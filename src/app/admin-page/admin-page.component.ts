@@ -22,6 +22,8 @@ export class AdminPageComponent implements OnInit  {
   }
 
   ngOnInit(): void {
+    this.service.showSearchInput = false;
+
     this.service.getOrder().subscribe(response => {
       this.allOrders = JSON.parse(JSON.stringify(response));
       this.arrayOfOrders = this.allOrders.filter((item: any) => {

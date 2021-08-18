@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.service.showSearchInput = false;
 
     this.loginForm = new FormGroup({
       login: new FormControl('', [Validators.required]),
