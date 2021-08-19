@@ -14,12 +14,6 @@ export interface navItem {
   path: string
 }
 
-export interface User {
-  name: string;
-}
-export interface Products {
-  title: string;
-}
 
 @Component({
   selector: 'app-header',
@@ -36,15 +30,8 @@ export class HeaderComponent implements OnInit {
   isAdmin: boolean | any;
   statusLogin: boolean | any;
 
-  searchInput = new FormControl();
-  options: User[] = [
-    {name: 'Mary'},
-    {name: 'Shelley'},
-    {name: 'Igor'}
-  ];
 
-  filteredOptions: Observable<User[]> | any;
-  //filteredOptions: Observable<Products[]> | any;
+
 
 
   constructor(public service: PizzaService, private route: Router, public dialog: MatDialog,) {
@@ -80,23 +67,8 @@ export class HeaderComponent implements OnInit {
       this.service.showCircle = false;
     }
 
-
-    this.filteredOptions = this.searchInput.valueChanges
-      .pipe(
-        startWith(''),
-        map(value => typeof value === 'string' ? value : value.name),
-        map(name => name ? this._filter(name) : this.options.slice())
-      );
   }
 
-  displayFn(user: User): string {
-    return user && user.name ? user.name : '';
-  }
-
-  private _filter(name: string): User[] {
-    const filterValue = name.toLowerCase();
-    return this.options.filter(option => option.name.toLowerCase().includes(filterValue));
-  }
 
   logout() {
     if (this.service.statusLogin) {

@@ -1,25 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl} from "@angular/forms";
-import {User} from "../header/header.component";
 import {Observable} from "rxjs";
 import {PizzaService} from "../pizza-service.service";
 import {map, startWith} from "rxjs/operators";
 
+
+export interface User {
+  name: string;
+}
+export interface Products {
+  title: string;
+}
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']
 })
+
+
 export class SearchComponent implements OnInit {
   searchInput = new FormControl();
   orderArray: any;
-  arrayOfTitleProducts: any;
-  options: User[] = [
-    {name: 'Mary'},
-    {name: 'Shelley'},
-    {name: 'Igor'}
-  ];
-  filteredOptions: Observable<User[]> | any;
+  arrayOfTitleProducts: Products[] = [];
+
+  filteredOptions:  any;
 
   constructor(public service: PizzaService) { }
 
@@ -32,17 +36,17 @@ export class SearchComponent implements OnInit {
     this.filteredOptions = this.searchInput.valueChanges
       .pipe(
         startWith(''),
-        map(value => typeof value === 'string' ? value : value.name),
-        map(name => name ? this._filter(name) : this.options.slice())
+        map(value => typeof value === 'string' ? value : value.title),
+        map(title => title ? this._filter(title) : this.arrayOfTitleProducts.slice())
       );
   }
-  displayFn(user: User): string {
-    return user && user.name ? user.name : '';
+  displayFn(products: any): string {
+    return products && products.title ? products.title : '';
   }
 
-  private _filter(name: string): User[] {
-    const filterValue = name.toLowerCase();
-    return this.options.filter(option => option.name.toLowerCase().includes(filterValue));
+  private _filter(title: string) {
+    const filterValue = title.toLowerCase();
+    return this.arrayOfTitleProducts.filter(option => option.title.toLowerCase().includes(filterValue));
   }
 
 }
